@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Page with GSAP Animations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+      text-align: center;
+    }
+    #rect {
+      font-size: 40px;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 50px;
+      height: 50px;
+      user-select: none;
+    }
+    .text {
+      font-size: 2rem;
+      margin: 100px 0 30px;
+      display: inline-block;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    svg {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: visible;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Login</h2>
+  <form>
+    <input type="text" placeholder="Username" required /><br /><br />
+    <input type="password" placeholder="Password" required /><br /><br />
+    <button type="submit">Login</button>
+  </form>
+
+  <div id="rect">🚀</div>
+
+  <div class="text">Welcome to Login</div>
+
+  <button id="chars">Animate Chars (Simple Fade)</button>
+  <button id="words">Animate Words (Slide Up)</button>
+  <button id="lines">Animate Lines (Rotate)</button>
+
+  <svg>
+    <path id="path" d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80" />
+  </svg>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(MotionPathPlugin);
+
+    gsap.to("#rect", {
+      duration: 7, 
+      repeat: 11,
+      repeatDelay: 2,
+      yoyo: true,
+      ease: "power1.inOut",
+      motionPath:{
+        path: "#path",
+        align: "#path",
+        autoRotate: true,
+        alignOrigin: [0.6, 0.6]
+      }
+    });
+
+    const textEl = document.querySelector(".text");
+
+    document.querySele
