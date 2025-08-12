@@ -1,145 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Healthmandu - Dashboard</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="home.css" />
 </head>
-<style>
-        .slidebar{
-            width: 300px;
-            background-color: #f4f4f4;
-            padding: 15px;
-            border-right: 1px solid #ccc;
-            border-right: 2px solid black;
-        }
-    </style>
 <body>
-           <div class="app"></div>
-    <aside class="slidebar">
-        
-            <div class="logo">
-                <div style="margin-top: 12px;"><strong>Health</strong>Mandu</div>
-            </div>
-            <div class="card">
-                <h3>Profile</h3>
-                <div>
-                    <p>Name:</p>
-                    <input type="text">
-                    <p>Age:</p>
-                    <input type="number"><br>
-                    <p>Gender:</p>
-                    <select name="" id="">
-                        <option value="">Choose your gender</option>
-                        <option value="">Male</option>
-                        <option value="">Female</option>
-                        <option value="">Other</option>
-                    </select>
-                    <p>Occupation:</p>
-                    <input type="text">
-                    <hr>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia cum consequuntur ducimus necessitatibus sint quo cupiditate reiciendis dignissimos? Vero illo non maiores nihil quo libero quam tempore tenetur voluptas exercitationem.</p>
-                </div>
-                 </aside>
-            </div>
-       
-        <main>
-    <div class="aqi">
-        <aside class="sidebar2">
-            <h3>Greeting</h3>
-        </aside>
-        <h3>AQI report</h3>
-        </div>
-        <hr>
-        <div>
-            <h3>Events</h3>
-        </div>
-        <div class="tabs" id="tabs">
-           <div class="tab">Health Center</div>
-           <div class="tab">Well_Spot</div> 
-           <div class="tab">Diet</div>
-
-        </div>
-        <section id="tabpanels">
-            <!--health-->
-            <div class="tabpanel" id="health">
-                <h3>Health Center Report</h3>
-                <div class="grid"> 
-<div class="card">
-  <div><strong>KMC:</strong></div>
-</div>Kathmandu Model College HOspital</div>
-<div>
-                <p>Location:Gaushala</p>
-                <p>Features:All kinds of Major Probles</p>
-</div>
-</div>
-
-<div class="card">
-  <div><strong>TUTH:</strong></div>
-</div>Tribhuvan University Teaching HOspital</div>
-<div>
-                <p>Location:Kathmandu, Nepal</p>
-                <p>Features:Public teaching hospital (700 beds) offering general, emergency, inpatient, extended health services</p>
-</div>
-</div>
-
-<div class="card">
-  <div><strong>Bir Hospital:</strong></div>
-
-<div>
-                <p>Location:Kathmandu, Nepal</p>
-                <p>Features:Public maternity hospital (~415 beds), obstetrics, gynaecology, neonatology</p>
-</div>
-</div>
-
-<div class="card">
-  <div><strong>Civil Service Hospital:</strong></div>
-
-<div>
-                <p>Location:Kathmandu, Nepal</p>
-                <p>Features:Government multi‑specialty (132 beds), emergency, ICU, wide departmental services incl. cardiology, oncology, dialysis </p>
-</div>
-</div>
-
-<div class="card">
-  <div><strong>Shree Birendra Hospital:</strong></div>
-
-<div>
-                <p>Location:Kathmandu, Nepal</p>
-                <p>Features:Army‑run hospital (~635 beds), wide specialties, now open for civilians </p>
-</div>
-</div>
-
-<div class="card">
-  <div><strong>Shahid Gangalal National Heart Centre:</strong></div>
-
-<div>
-                <p>Location:Kathmandu, Nepal</p>
-                <p>Features:Government cardiac tertiary centre (300 beds), interventional and surgical cardiology </p>
-</div>
-</div>
-<div class="tabpanel" id="health">
-                <h3>Enjoy the Location that make you Relad<h3>
-                <div class="grid"> 
-              <div class="card">
-                <div><strong>Tribhuvan Park </strong></div>
-                <p> Located in Kathmandu, this peaceful and well-maintained green space is ideal for picnics and gatherings. Visitors praise its “sprawling grounds” and remind one another to help keep it clean by using dustbins.</p>
-              </div>
-              <div class="card">
-                <div><strong>Taudaha Lake</strong></div>
-                <p>A serene lakeside escape on the edge of Kathmandu, historically a royal duck farm. It’s popular for birdwatching, boating, and low-impact relaxation.</p>
-            </div>
-            <div class="card">
-<div><strong>Godavari Botanical Garden</strong></div>
-<p></p>
-            </div>
-
-
-                </div>    
-                </div>
-
-        </section>
-        </main>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <h1>Healthmandu</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
     </div>
+  </nav>
+
+  <div class="app-container">
+    <!-- Sidebar Profile -->
+    <aside class="sidebar">
+      <div class="profile-card">
+        <div class="profile-header">
+          <h3>Welcome back!</h3>
+        </div>
+        <form class="profile-form">
+          <div class="input-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter your name" />
+          </div>
+          <div class="input-group">
+            <label for="location">Location</label>
+            <select id="location">
+              <option value="" disabled selected>Select Location</option>
+              <option value="Kathmandu">Kathmandu</option>
+              <option value="Bhaktapur">Bhaktapur</option>
+              <option value="Lalitpur">Lalitpur</option>
+              <option value="Pokhara">Pokhara</option>
+            </select>
+          </div>
+          <div class="profile-info">
+            <p>
+              Your location helps us tailor information about health
+              centers, wellness spots, and air quality in your area.
+            </p>
+          </div>
+        </form>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Greeting + AQI -->
+      <section class="greeting-section">
+        <div class="greeting-card">
+          <h2>Hi, Healthmandu User!</h2>
+          <p>
+            Welcome to your personalized dashboard where you can find the latest
+            updates on air quality, health centers, wellness spots, and
+            upcoming events.
+          </p>
+        </div>
+        <div class="aqi-card">
+          <h3>Air Quality Index</h3>
+          <div class="aqi-value">
+            <span class="aqi-number">85</span>
+            <span class="aqi-status moderate">Moderate</span>
+          </div>
+          <p>
+            The air quality in your area is moderate. Consider wearing masks and
+            limiting outdoor activities.
+          </p>
+        </div>
+      </section>
+
+      <!-- Tabs for Health Centers & Wellness Spots -->
+      <section class="tabs-container">
+        <div class="tabs">
+          <button class="tab active" data-tab="health-centers">Health Centers</button>
+          <button class="tab" data-tab="wellness-spots">Wellness Spots</button>
+        </div>
+
+        <div class="tabpanel active" id="health-centers">
+          <h3>Health Centers</h3>
+          <div class="grid">
+            <div class="card">
+              <h4>Kathmandu Medical Center</h4>
+              <p>Location: Kathmandu</p>
+              <p>24/7 Emergency Services</p>
+              <p>Contact: +977-1-1234567</p>
+            </div>
+            <div class="card">
+              <h4>Bhaktapur Hospital</h4>
+              <p>Location: Bhaktapur</p>
+              <p>Specialized in Pediatrics</p>
+              <p>Contact: +977-1-7654321</p>
+            </div>
+            <div class="card">
+              <h4>Lalitpur General Clinic</h4>
+              <p>Location: Lalitpur</p>
+              <p>Outpatient Services</p>
+              <p>Contact: +977-1-9876543</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpanel" id="wellness-spots">
+          <h3>Wellness Spots</h3>
+          <div class="grid">
+            <div class="card">
+              <h4>Peaceful Yoga Studio</h4>
+              <p>Location: Kathmandu</p>
+              <p>Yoga and Meditation Classes</p>
+              <p>Contact: +977-1-3344556</p>
+            </div>
+            <div class="card">
+              <h4>Healing Touch Spa</h4>
+              <p>Location: Pokhara</p>
+              <p>Massage and Wellness Treatments</p>
+              <p>Contact: +977-61-123456</p>
+            </div>
+            <div class="card">
+              <h4>Green Life Wellness</h4>
+              <p>Location: Lalitpur</p>
+              <p>Nutrition and Holistic Health</p>
+              <p>Contact: +977-1-5544332</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Upcoming Events -->
+      <section class="events-section">
+        <h3>Upcoming Events</h3>
+        <div class="event-card">
+          <span class="event-date">Aug 20</span>
+          <span class="event-title">World Health Day Awareness</span>
+        </div>
+        <div class="event-card">
+          <span class="event-date">Sep 5</span>
+          <span class="event-title">Yoga and Wellness Workshop</span>
+        </div>
+        <div class="event-card">
+          <span class="event-date">Oct 10</span>
+          <span class="event-title">Community Blood Donation Camp</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Tabs functionality
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.tabpanel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs & panels
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        // Add active class to clicked tab & related panel
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
