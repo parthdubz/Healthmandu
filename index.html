@@ -40,7 +40,7 @@
           <p>Sign in to your account</p>
         </div>
         
-        <form class="form">
+        <form class="form" id="loginFormElement">
           <div class="input-group">
             <label for="loginEmail">Email</label>
             <input type="email" id="loginEmail" placeholder="Enter your email" required />
@@ -61,7 +61,7 @@
           </div>
           
           <button type="submit" class="btn-primary">Sign In</button>
-          <button type="button" class="btn-secondary">Demo Account</button>
+          <button type="button" class="btn-secondary" onclick="demoLogin()">Demo Account</button>
         </form>
         
         <div class="form-footer">
@@ -69,13 +69,14 @@
         </div>
       </div>
 
+      <!-- Enhanced signup form with better validation and redirect functionality -->
       <div class="form-card hidden" id="signupForm">
         <div class="form-header">
           <h2>Create Account</h2>
           <p>Join Healthmandu today</p>
         </div>
         
-        <form class="form">
+        <form class="form" id="signupFormElement">
           <div class="input-group">
             <label for="signupUsername">Username</label>
             <input type="text" id="signupUsername" placeholder="Choose a username" required />
@@ -97,7 +98,7 @@
           </div>
           
           <button type="submit" class="btn-primary">Create Account</button>
-          <button type="button" class="btn-secondary">Demo Account</button>
+          <button type="button" class="btn-secondary" onclick="demoLogin()">Demo Account</button>
         </form>
         
         <div class="form-footer">
@@ -119,8 +120,73 @@
       loginForm.classList.toggle('hidden');
       signupForm.classList.toggle('hidden');
     }
+
+    function demoLogin() {
+      // Simulate successful login and redirect to main page
+      localStorage.setItem('healthmandu_user', JSON.stringify({
+        username: 'demo_user',
+        email: 'demo@healthmandu.com',
+        loginTime: new Date().toISOString()
+      }));
+      
+      // Show success message
+      showMessage('Demo login successful! Redirecting to dashboard...', 'success');
+      
+      // Redirect after short delay
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 1500);
+    }
+
+    function showMessage(message, type = 'info') {
+      // Remove existing messages
+      const existingMessage = document.querySelector('.message');
+      if (existingMessage) {
+        existingMessage.remove();
+      }
+
+      // Create new message element
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message message-${type}`;
+      messageDiv.textContent = message;
+      
+      // Style the message
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        color: white;
+        font-weight: 500;
+        z-index: 1000;
+        animation: slideIn 0.3s ease;
+        max-width: 300px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      `;
+
+      // Set background color based on type
+      if (type === 'success') {
+        messageDiv.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
+      } else if (type === 'error') {
+        messageDiv.style.background = 'linear-gradient(135deg, #f56565, #e53e3e)';
+      } else {
+        messageDiv.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+      }
+
+      document.body.appendChild(messageDiv);
+
+      // Auto remove after 3 seconds
+      setTimeout(() => {
+        if (messageDiv.parentNode) {
+          messageDiv.style.animation = 'slideOut 0.3s ease';
+          setTimeout(() => messageDiv.remove(), 300);
+        }
+      }, 3000);
+    }
   </script>
 
+  <script src="auth.js"></script>
   <script src="index.js"></script>
 </body>
 </html>
