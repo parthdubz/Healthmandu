@@ -1,4 +1,4 @@
-/* Enhanced Healthmandu CSS with Kathmandu Context */
+/* Enhanced Healthmandu CSS with Kathmandu Context and Animations */
 /* Reset and Base Styles */
 * {
   margin: 0;
@@ -14,20 +14,201 @@ body {
   color: #333;
   line-height: 1.6;
   position: relative;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.loaded {
+  opacity: 1;
 }
 
 /* Himalayan overlay effect */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><polygon fill="rgba(255,255,255,0.1)" points="0,20 20,0 40,10 60,5 80,15 100,8 100,20"/></svg>') repeat-x;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><polygon fill="rgba(255,255,255,0.1)" points="0,20 20,0 40,10 60,5 80,15 100,8 100,20"/></svg>')
+    repeat-x;
   background-size: 200px 40px;
   pointer-events: none;
   z-index: 1;
+  animation: mountainMove 20s ease-in-out infinite;
+}
+
+@keyframes mountainMove {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-20px);
+  }
+}
+
+/* Animation Keyframes */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Animation Classes */
+.animate-slide-down {
+  animation: slideDown 0.8s ease-out;
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.8s ease-out;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.8s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out;
+}
+
+/* Scroll Animation Classes */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-animate-card {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-animate-card.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-animate-event {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-animate-event.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Ripple Effect */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: rippleEffect 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
 /* Enhanced Navigation */
@@ -63,6 +244,7 @@ body::before {
   color: white;
   font-size: 1.5rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: float 3s ease-in-out infinite;
 }
 
 .logo-subtitle {
@@ -86,12 +268,28 @@ body::before {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   position: relative;
+  overflow: hidden;
+}
+
+.nav-links a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.nav-links a:hover::before {
+  left: 100%;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
   background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 /* App Container */
@@ -121,16 +319,32 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
 }
 
 .profile-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
   background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .profile-header {
@@ -152,6 +366,28 @@ body::before {
   padding: 1rem;
   border-radius: 12px;
   margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-widget::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
 }
 
 .weather-info {
@@ -209,7 +445,7 @@ body::before {
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .profile-info {
@@ -249,6 +485,13 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.greeting-card:hover,
+.aqi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
 }
 
 .greeting-card h2 {
@@ -274,6 +517,11 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.stat:hover {
+  transform: scale(1.1);
 }
 
 .stat-number {
@@ -308,6 +556,7 @@ body::before {
   font-weight: 700;
   font-size: 2.5rem;
   color: #e53e3e;
+  animation: pulse 2s ease-in-out infinite;
 }
 
 .aqi-status {
@@ -316,11 +565,23 @@ body::before {
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Added comprehensive AQI status color coding */
+.aqi-status.good {
+  background: rgba(34, 197, 94, 0.2);
+  color: #16a34a;
 }
 
 .aqi-status.moderate {
   background: rgba(255, 193, 7, 0.2);
   color: #f57c00;
+}
+
+.aqi-status.sensitive {
+  background: rgba(251, 146, 60, 0.2);
+  color: #ea580c;
 }
 
 .aqi-status.unhealthy {
@@ -363,11 +624,29 @@ body::before {
   border-left: 4px solid #667eea;
   margin-bottom: 1rem;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.event-card:hover::before {
+  left: 100%;
 }
 
 .event-card:hover {
   background: rgba(102, 126, 234, 0.1);
-  transform: translateX(5px);
+  transform: translateX(10px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
 }
 
 .event-date {
@@ -379,6 +658,11 @@ body::before {
   padding: 0.75rem;
   border-radius: 12px;
   min-width: 60px;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover .event-date {
+  transform: rotate(5deg) scale(1.1);
 }
 
 .event-date .day {
@@ -440,25 +724,47 @@ body::before {
   transition: all 0.3s ease;
   flex: 1;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.tab:hover::before {
+  left: 100%;
 }
 
 .tab.active {
   color: white;
   background: #667eea;
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
 }
 
 .tab:hover:not(.active) {
   color: #667eea;
   background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
 }
 
 .tabpanel {
   display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .tabpanel.active {
   display: block;
+  opacity: 1;
 }
 
 .tabpanel h3 {
@@ -488,10 +794,11 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -502,10 +809,25 @@ body::before {
   transition: transform 0.3s ease;
 }
 
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s;
+}
+
+.card:hover::after {
+  left: 100%;
+}
+
 .card:hover {
   background: rgba(255, 255, 255, 0.95);
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover::before {
@@ -515,6 +837,7 @@ body::before {
 .card.featured {
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
   border: 2px solid rgba(102, 126, 234, 0.3);
+  animation: pulse 3s ease-in-out infinite;
 }
 
 .card h4 {
@@ -544,6 +867,7 @@ body::before {
   text-transform: uppercase;
   background: rgba(102, 126, 234, 0.2);
   color: #667eea;
+  animation: float 2s ease-in-out infinite;
 }
 
 .card-badge.private {
@@ -610,6 +934,12 @@ body::before {
     font-size: 0.8rem;
     padding: 0.25rem;
   }
+
+  /* Mobile-specific animations */
+  .animate-slide-left,
+  .animate-slide-right {
+    animation: fadeInUp 0.8s ease-out;
+  }
 }
 
 /* High contrast mode support */
@@ -617,11 +947,11 @@ body::before {
   .card {
     border: 2px solid #333;
   }
-  
+
   .tab.active {
     border: 2px solid #333;
   }
-  
+
   .aqi-status {
     border: 1px solid currentColor;
   }
@@ -633,5 +963,39 @@ body::before {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .scroll-animate {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #667eea;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
