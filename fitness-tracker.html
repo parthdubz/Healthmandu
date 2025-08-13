@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthmandu - Fitness Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fitness-tracker.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>Healthmandu</h1>
+                <span class="logo-subtitle">काठमाडौं स्वास्थ्य सेवा</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Dashboard</a></li>
+                <li><a href="#" class="active">Fitness Tracker</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#">सहायता</a></li>
+                <li><a href="#" onclick="logout()" class="logout-btn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <h3>🏋️‍♀️ Fitness Journey</h3>
+                    <div class="gradient-card">
+                        <div class="shimmer-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-icon">💪</span>
+                            <span class="card-text">Stay Healthy in Kathmandu</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-description">
+                    <p>
+                        🏔️ Welcome to your personalized fitness journey in the heart of Nepal!
+                        <br><br>
+                        🧘‍♀️ Combine traditional yoga practices with modern fitness routines designed for Kathmandu's unique environment.
+                        <br><br>
+                        🥗 Follow our culturally-adapted diet plans featuring local ingredients and traditional Nepali nutrition wisdom.
+                        <br><br>
+                        📱 Emergency: <strong>100</strong> (Police) | <strong>101</strong> (Fire) | <strong>102</strong> (Ambulance)
+                    </p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="fitness-card">
+                <h2>🏋️‍♀️ Fitness Tracker - स्वास्थ्य ट्र्याकर</h2>
+                <p class="header-description">
+                    Your comprehensive fitness and nutrition guide tailored for life in Kathmandu Valley. Embrace wellness with exercises adapted for our altitude and climate, plus nutrition plans featuring local ingredients and traditional Nepali health wisdom.
+                </p>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('exercises')">💪 Exercises</button>
+                    <button class="tab" onclick="showTab('diet')">🥗 Diet Plans</button>
+                </div>
+            </div>
+
+            <!-- Exercises Tab -->
+            <div id="exercises-tab" class="tab-content active">
+                <!-- Body Exercises -->
+                <div class="fitness-card">
+                    <h3>💪 Body Exercises - शारीरिक व्यायाम</h3>
+                    <p class="section-description">
+                        Strengthen your body with these exercises designed for Kathmandu's environment and lifestyle.
+                    </p>
+                    <div class="grid">
+                        <div class="exercise-item">
+                            <h4>🏃‍♂️ Morning Jog in Ratna Park</h4>
+                            <p>Start your day with a refreshing 30-minute jog around Kathmandu's green spaces. Best done early morning (6-7 AM) for cleaner air.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>💪 Push-ups (Nepali Style)</h4>
+                            <p>Traditional push-ups with focus on breathing techniques. Start with 3 sets of 10, gradually increase to build upper body strength.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🦵 Squats at Home</h4>
+                            <p>Perfect for small spaces in Kathmandu homes. 3 sets of 15 squats help strengthen legs and improve mobility for daily activities.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🏋️‍♀️ Dumbbell Workout</h4>
+                            <p>Use water bottles if dumbbells unavailable. Focus on bicep curls, shoulder presses, and chest exercises. 20 minutes daily.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🧗‍♂️ Stair Climbing</h4>
+                            <p>Utilize Kathmandu's hilly terrain! Climb stairs in your building or local temples. Excellent cardio and leg strengthening.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🤸‍♀️ Burpees Challenge</h4>
+                            <p>High-intensity full-body exercise. Start with 5 burpees, increase by 1 each day. Great for building endurance and strength.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🏃‍♀️ High Knees</h4>
+                            <p>Indoor cardio perfect for monsoon season. 30 seconds high knees, 30 seconds rest. Repeat 10 times for great cardio workout.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🤲 Plank Hold</h4>
+                            <p>Core strengthening exercise. Start with 30 seconds, gradually increase to 2 minutes. Essential for back health and posture.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🦋 Jumping Jacks</h4>
+                            <p>Classic cardio exercise perfect for small spaces. 3 sets of 20 jumping jacks. Great warm-up before other exercises.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🏋️‍♂️ Lunges</h4>
+                            <p>Forward and reverse lunges for leg strength. 3 sets of 12 each leg. Helps with balance and lower body power.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🤸‍♂️ Mountain Climbers</h4>
+                            <p>Dynamic exercise mimicking climbing Nepal's mountains! 30 seconds intense, 30 seconds rest. Builds cardio and core strength.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>💺 Chair Dips</h4>
+                            <p>Use any sturdy chair for tricep dips. 3 sets of 10. Perfect for office workers to combat desk job effects.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yoga Exercises -->
+                <div class="fitness-card">
+                    <h3>🧘‍♀️ Yoga & Meditation - योग र ध्यान</h3>
+                    <p class="section-description">
+                        Connect with Nepal's ancient yoga traditions through these mindful practices.
+                    </p>
+                    <div class="grid">
+                        <div class="exercise-item">
+                            <h4>🧘‍♀️ Surya Namaskara (Sun Salutation)</h4>
+                            <p>Traditional 12-pose sequence honoring the sun. Best performed facing east during sunrise. Complete 5-10 rounds for full body stretch.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🕉️ Pranayama (Breathing Exercise)</h4>
+                            <p>Essential breathing technique for Kathmandu's air quality. Practice Anulom Vilom for 10 minutes daily to purify respiratory system.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🧘‍♂️ Padmasana (Lotus Pose)</h4>
+                            <p>Classic meditation pose. Sit cross-legged, spine straight. Hold for 5-15 minutes while focusing on breath and inner peace.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🌳 Vrikshasana (Tree Pose)</h4>
+                            <p>Balance pose representing Nepal's sacred trees. Stand on one leg, other foot on inner thigh. Hold 30 seconds each side.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🐍 Bhujangasana (Cobra Pose)</h4>
+                            <p>Backbend pose strengthening spine. Lie face down, lift chest using back muscles. Hold 15-30 seconds, repeat 3 times.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>🐕 Adho Mukha Svanasana (Downward Dog)</h4>
+                            <p>Inverted V-shape pose stretching entire body. Great for relieving stress and improving circulation. Hold for 1-2 minutes.</p>
+                        </div>
+                        <div class="exercise-item">
+                            <h4>👶 Balasana (Child's Pose)</h4>
+                            <p>Restorative pose for relaxation. Kneel and fold forward, arms extended. Perfect for ending yoga session and reducing anxiety.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diet Tab -->
+            <div id="diet-tab" class="tab-content">
+                <div class="fitness-card">
+                    <h3>🥗 Weekly Diet Plan - साप्ताहिक आहार योजना</h3>
+                    <p class="section-description">
+                        Nourish your body with this balanced weekly meal plan featuring local Nepali ingredients and traditional nutrition wisdom.
+                    </p>
+
+                    <!-- Sunday -->
+                    <div class="day-section">
+                        <div class="day-header">
+                            <h4>Sunday - आइतबार</h4>
+                        </div>
+                        <div class="grid">
+                            <div class="diet-item">
+                                <h4>🌅 Breakfast: Chiura (Beaten Rice) with Yogurt</h4>
+                                <p>Traditional Nepali breakfast rich in probiotics and carbs</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥤 Mid-Morning: Green Tea with Honey</h4>
+                                <p>Antioxidant-rich drink to boost metabolism</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍽️ Lunch: Dal Bhat with Seasonal Vegetables</h4>
+                                <p>Complete protein with lentils, rice, and local vegetables</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍎 Snack: Seasonal Fruits (Apple/Orange)</h4>
+                                <p>Local fruits rich in vitamins and fiber</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🌙 Dinner: Vegetable Soup with Roti</h4>
+                                <p>Light dinner with whole wheat bread and nutritious soup</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>💧 Hydration: 8-10 glasses of filtered water</h4>
+                                <p>Essential for Kathmandu's dry climate</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monday -->
+                    <div class="day-section">
+                        <div class="day-header">
+                            <h4>Monday - सोमबार</h4>
+                        </div>
+                        <div class="grid">
+                            <div class="diet-item">
+                                <h4>🌅 Breakfast: Oats with Nuts and Honey</h4>
+                                <p>Fiber-rich breakfast for sustained energy</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥤 Mid-Morning: Lemon Water</h4>
+                                <p>Vitamin C boost and detoxification</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍽️ Lunch: Brown Rice with Chicken Curry</h4>
+                                <p>Lean protein with complex carbohydrates</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥜 Snack: Mixed Nuts (Almonds, Walnuts)</h4>
+                                <p>Healthy fats and protein for brain health</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🌙 Dinner: Grilled Fish with Salad</h4>
+                                <p>Omega-3 rich dinner with fresh vegetables</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍵 Evening: Herbal Tea (Chamomile)</h4>
+                                <p>Relaxing tea for better sleep quality</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tuesday -->
+                    <div class="day-section">
+                        <div class="day-header">
+                            <h4>Tuesday - मङ्गलबार</h4>
+                        </div>
+                        <div class="grid">
+                            <div class="diet-item">
+                                <h4>🌅 Breakfast: Whole Wheat Paratha with Yogurt</h4>
+                                <p>Traditional breakfast with probiotics</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥤 Mid-Morning: Fresh Juice (Seasonal)</h4>
+                                <p>Natural vitamins and minerals</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍽️ Lunch: Quinoa Salad with Vegetables</h4>
+                                <p>Complete protein with fresh local produce</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍌 Snack: Banana with Peanut Butter</h4>
+                                <p>Quick energy and healthy fats</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🌙 Dinner: Lentil Soup with Vegetables</h4>
+                                <p>Plant-based protein and fiber</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥛 Night: Warm Milk with Turmeric</h4>
+                                <p>Anti-inflammatory drink for recovery</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wednesday -->
+                    <div class="day-section">
+                        <div class="day-header">
+                            <h4>Wednesday - बुधबार</h4>
+                        </div>
+                        <div class="grid">
+                            <div class="diet-item">
+                                <h4>🌅 Breakfast: Muesli with Fresh Fruits</h4>
+                                <p>Fiber and antioxidant-rich morning meal</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥤 Mid-Morning: Coconut Water</h4>
+                                <p>Natural electrolytes and hydration</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍽️ Lunch: Vegetable Biryani</h4>
+                                <p>Aromatic rice dish with mixed vegetables</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥕 Snack: Carrot and Cucumber Sticks</h4>
+                                <p>Crunchy vegetables with vitamins</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🌙 Dinner: Grilled Chicken with Steamed Broccoli</h4>
+                                <p>Lean protein with nutrient-dense vegetables</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍵 Evening: Ginger Tea</h4>
+                                <p>Digestive aid and immune booster</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thursday -->
+                    <div class="day-section">
+                        <div class="day-header">
+                            <h4>Thursday - बिहिबार</h4>
+                        </div>
+                        <div class="grid">
+                            <div class="diet-item">
+                                <h4>🌅 Breakfast: Scrambled Eggs with Toast</h4>
+                                <p>High-quality protein for muscle building</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥤 Mid-Morning: Buttermilk</h4>
+                                <p>Probiotics for digestive health</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍽️ Lunch: Fish Curry with Brown Rice</h4>
+                                <p>Omega-3 fatty acids with complex carbs</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍇 Snack: Greek Yogurt with Berries</h4>
+                                <p>Protein and antioxidants</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🌙 Dinner: Vegetable Stir-fry with Tofu</h4>
+                                <p>Plant-based protein with colorful vegetables</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🌿 Night: Mint Tea</h4>
+                                <p>Soothing digestive tea</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Friday -->
+                    <div class="day-section">
+                        <div class="day-header">
+                            <h4>Friday - शुक्रबार</h4>
+                        </div>
+                        <div class="grid">
+                            <div class="diet-item">
+                                <h4>🌅 Breakfast: Smoothie Bowl with Seeds</h4>
+                                <p>Nutrient-dense breakfast with chia and flax seeds</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥤 Mid-Morning: Green Smoothie</h4>
+                                <p>Leafy greens with fruits for vitamins</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍽️ Lunch: Chicken Salad with Avocado</h4>
+                                <p>Healthy fats with lean protein</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥨 Snack: Whole Grain Crackers with Hummus</h4>
+                                <p>Complex carbs with plant protein</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🌙 Dinner: Baked Salmon with Sweet Potato</h4>
+                                <p>Omega-3s with beta-carotene</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍵 Evening: Jasmine Tea</h4>
+                                <p>Antioxidant-rich relaxing tea</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Saturday -->
+                    <div class="day-section">
+                        <div class="day-header">
+                            <h4>Saturday - शनिबार</h4>
+                        </div>
+                        <div class="grid">
+                            <div class="diet-item">
+                                <h4>🌅 Breakfast: Pancakes with Fresh Fruits</h4>
+                                <p>Weekend treat with natural sweetness</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥤 Mid-Morning: Fresh Orange Juice</h4>
+                                <p>Vitamin C boost for immune system</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍽️ Lunch: Mutton Curry with Rice</h4>
+                                <p>Traditional Nepali protein-rich meal</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🍪 Snack: Homemade Energy Balls</h4>
+                                <p>Dates, nuts, and seeds for natural energy</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🌙 Dinner: Vegetable Soup with Bread</h4>
+                                <p>Light, nutritious end to the week</p>
+                            </div>
+                            <div class="diet-item">
+                                <h4>🥛 Night: Golden Milk (Turmeric Latte)</h4>
+                                <p>Anti-inflammatory bedtime drink</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Add loaded class to body when page loads
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

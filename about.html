@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Healthmandu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #333;
+  line-height: 1.6;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+/* Himalayan overlay effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><polygon fill="rgba(255,255,255,0.1)" points="0,20 20,0 40,10 60,5 80,15 100,8 100,20"/></svg>')
+    repeat-x;
+  background-size: 200px 40px;
+  pointer-events: none;
+  z-index: 1;
+  animation: mountainMove 20s ease-in-out infinite;
+}
+
+@keyframes mountainMove {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-20px);
+  }
+}
+
+/* Animation Keyframes */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Navigation */
+.navbar {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.8s ease-out;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+.logo-subtitle {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  margin-top: -2px;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* About Container */
+.about-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 4rem 0;
+  margin-bottom: 4rem;
+}
+
+.hero-content {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 4rem 2rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+}
+
+.hero-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #718096;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #718096;
+  font-weight: 600;
+}
+
+/* About Cards */
+.about-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.about-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+}
+
+.about-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.card-content.reverse {
+  grid-template-columns: 1fr 1fr;
+}
+
+.card-content.reverse .text-content {
+  order: 2;
+}
+
+.card-content.reverse .image-content {
+  order: 1;
+}
+
+.text-content h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+.text-content p {
+  color: #718096;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  color: #718096;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.image-content {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.image-content img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.image-content:hover img {
+  transform: scale(1.05);
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-item strong {
+  color: #2d3748;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+  color: #718096;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Vision Points */
+.vision-points {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.vision-item h4 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.vision-item ul {
+  list-style: none;
+  padding: 0;
+}
+
+.vision-item li {
+  color: #718096;
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+}
+
+/* Differences List */
+.differences-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.difference-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.diff-number {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.difference-item strong {
+  color: #2d3748;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.difference-item p {
+  color: #718096;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Call to Action Section */
+.cta-section {
+  text-align: center;
+  padding: 4rem 0;
+  margin-top: 4rem;
+}
+
+.cta-content {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-radius: 25px;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-content::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 3s linear infinite;
+}
+
+.cta-content h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-content p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-button {
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: "DM Sans", sans-serif;
+}
+
+.cta-button.primary {
+  background: white;
+  color: #667eea;
+}
+
+.cta-button.secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button.primary:hover {
+  background: #f8f9fa;
+}
+
+.cta-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 1rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-stats .stat-item {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .card-content,
+  .card-content.reverse {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .card-content.reverse .text-content,
+  .card-content.reverse .image-content {
+    order: unset;
+  }
+
+  .about-card {
+    padding: 2rem;
+  }
+
+  .text-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+  }
+
+  .nav-links a {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .hero-content {
+    padding: 2rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .about-card {
+    padding: 1.5rem;
+  }
+
+  .text-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .image-content img {
+    height: 250px;
+  }
+
+  .cta-content {
+    padding: 2rem 1rem;
+  }
+
+  .cta-content h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animation classes for scroll effects */
+.fade-in-left {
+  animation-delay: 0.2s;
+}
+
+.fade-in-right {
+  animation-delay: 0.4s;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>Healthmandu</h1>
+                <span class="logo-subtitle">काठमाडौं स्वास्थ्य सेवा</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Dashboard</a></li>
+                <li><a href="#" class="active">About</a></li>
+                <li><a href="#">सहायता</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Us Container -->
+    <div class="about-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">About Healthmandu</h1>
+                <p class="hero-subtitle">Empowering wellness in the heart of Nepal with traditional wisdom and modern technology</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Exercises</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Emergency Support</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Cards Section -->
+        <section class="about-cards">
+            <!-- Introduction Card -->
+            <div class="about-card fade-in-left" data-aos="fade-right">
+                <div class="card-content">
+                    <div class="text-content">
+                        <h2>🏔️ Introduction</h2>
+                        <p>Healthmandu is Nepal's premier digital health companion, specifically designed for life in Kathmandu Valley. Born from the unique challenges of high-altitude living and urban wellness needs, our platform combines centuries-old Nepali health traditions with cutting-edge fitness technology.</p>
+                        <p>We understand that wellness in Nepal requires special consideration for altitude, air quality, monsoon seasons, and cultural dietary preferences. That's why every feature, exercise, and nutrition plan is thoughtfully crafted for the Nepali lifestyle.</p>
+                        <ul class="feature-list">
+                            <li>🧘‍♀️ Traditional yoga and meditation practices</li>
+                            <li>🥗 Local ingredient-based nutrition plans</li>
+                            <li>🏃‍♂️ Altitude-adapted fitness routines</li>
+                            <li>📱 24/7 emergency health support</li>
+                        </ul>
+                    </div>
+                    <div class="image-content">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400&fit=crop&crop=center" alt="Kathmandu Valley Mountains" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Features Card -->
+            <div class="about-card fade-in-right" data-aos="fade-left">
+                <div class="card-content reverse">
+                    <div class="image-content">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&h=400&fit=crop&crop=center" alt="Yoga and Fitness" />
+                    </div>
+                    <div class="text-content">
+                        <h2>✨ Special Features</h2>
+                        <p>Our innovative features are designed to address the unique health and wellness challenges faced by residents of Kathmandu Valley and Nepal as a whole.</p>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <span class="feature-icon">🎥</span>
+                                <div>
+                                    <strong>Interactive Video Tutorials</strong>
+                                    <p>Step-by-step exercise guidance with traditional Nepali techniques</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📅</span>
+                                <div>
+                                    <strong>Smart Daily Planning</strong>
+                                    <p>Automatic meal and workout plans based on current day and season</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🌬️</span>
+                                <div>
+                                    <strong>Air Quality Adaptation</strong>
+                                    <p>Exercise recommendations based on Kathmandu's air quality index</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🍛</span>
+                                <div>
+                                    <strong>Local Cuisine Integration</strong>
+                                    <p>Nutrition plans featuring dal, bhat, gundruk, and traditional foods</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ideas & Vision Card -->
+            <div class="about-card fade-in-left" data-aos="fade-right">
+                <div class="card-content">
+                    <div class="text-content">
+                        <h2>💡 Ideas & Vision</h2>
+                        <p>Our vision extends beyond just fitness tracking. We aim to create a holistic wellness ecosystem that honors Nepal's rich health traditions while embracing modern scientific approaches to wellbeing.</p>
+                        <div class="vision-points">
+                            <div class="vision-item">
+                                <h4>🎯 Our Mission</h4>
+                                <p>To make quality healthcare and fitness accessible to every person in Nepal, regardless of their location or economic status, while preserving our cultural health wisdom.</p>
+                            </div>
+                            <div class="vision-item">
+                                <h4>🌟 Our Values</h4>
+                                <ul>
+                                    <li><strong>Cultural Respect:</strong> Honoring traditional Nepali health practices</li>
+                                    <li><strong>Accessibility:</strong> Health solutions for all economic backgrounds</li>
+                                    <li><strong>Innovation:</strong> Blending ancient wisdom with modern technology</li>
+                                    <li><strong>Community:</strong> Building a supportive health network across Nepal</li>
+                                </ul>
+                            </div>
+                            <div class="vision-item">
+                                <h4>🚀 Future Goals</h4>
+                                <p>Expanding to rural Nepal, integrating AI-powered health insights, partnering with local healthcare providers, and becoming Nepal's most trusted digital health platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-content">
+                        <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=500&h=400&fit=crop&crop=center" alt="Traditional Nepali Meditation" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- What Makes It Different Card -->
+            <div class="about-card fade-in-right" data-aos="fade-left">
+                <div class="card-content reverse">
+                    <div class="image-content">
+                        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=500&h=400&fit=crop&crop=center" alt="Technology and Health" />
+                    </div>
+                    <div class="text-content">
+                        <h2>🌟 What Makes Us Different</h2>
+                        <p>Unlike generic fitness apps, Healthmandu is built specifically for Nepal's unique geographical, cultural, and lifestyle challenges. Here's what sets us apart:</p>
+                        <div class="differences-list">
+                            <div class="difference-item">
+                                <span class="diff-number">01</span>
+                                <div>
+                                    <strong>Altitude-Specific Training</strong>
+                                    <p>Exercise routines adapted for high-altitude living in Kathmandu (1,400m above sea level)</p>
+                                </div>
+                            </div>
+                            <div class="difference-item">
+                                <span class="diff-number">02</span>
+                                <div>
+                                    <strong>Cultural Integration</strong>
+                                    <p>Seamlessly blends traditional Ayurvedic principles with modern fitness science</p>
+                                </div>
+                            </div>
+                            <div class="difference-item">
+                                <span class="diff-number">03</span>
+                                <div>
+                                    <strong>Local Language Support</strong>
+                                    <p>Full Nepali language interface with culturally appropriate health advice</p>
+                                </div>
+                            </div>
+                            <div class="difference-item">
+                                <span class="diff-number">04</span>
+                                <div>
+                                    <strong>Emergency Integration</strong>
+                                    <p>Direct connection to Nepal's emergency services (100, 101, 102) for immediate help</p>
+                                </div>
+                            </div>
+                            <div class="difference-item">
+                                <span class="diff-number">05</span>
+                                <div>
+                                    <strong>Seasonal Adaptation</strong>
+                                    <p>Programs that adjust for monsoon season, festivals, and Nepal's unique climate patterns</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Start Your Wellness Journey?</h2>
+                <p>Join thousands of Nepalis who have already transformed their health with Healthmandu</p>
+                <div class="cta-buttons">
+                    <a href="fitness-tracker.html" class="cta-button primary">Start Fitness Tracker</a>
+                    <a href="#" class="cta-button secondary">Download Mobile App</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Add loaded class to body when page loads
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+            initScrollAnimations();
+        });
+
+        // Scroll animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all about cards
+            document.querySelectorAll('.about-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
