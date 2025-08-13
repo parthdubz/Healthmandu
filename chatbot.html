@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthmandu - Health Guidance Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>Healthmandu</h1>
+                <span class="logo-subtitle">काठमाडौं स्वास्थ्य सेवा</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="fitness-tracker.html">Fitness Tracker</a></li>
+                <li><a href="home.html">Dashboard</a></li>
+                <li><a href="#" class="active">Health Chatbot</a></li>
+                <li><a href="#">सहायता</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <h3>🤖 AI Health Assistant</h3>
+                    <div class="gradient-card">
+                        <div class="shimmer-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-icon">💬</span>
+                            <span class="card-text">Your Personal Health Guide</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-description">
+                    <p>
+                        🏥 Get instant health guidance from our AI-powered assistant trained on medical knowledge and Nepali health practices.
+                        <br><br>
+                        💊 Ask about symptoms, home remedies, wellness tips, and general health advice tailored for life in Kathmandu.
+                        <br><br>
+                        ⚠️ <strong>Disclaimer:</strong> This chatbot provides general health information only. For serious medical concerns, consult a qualified healthcare professional.
+                        <br><br>
+                        📱 Emergency: <strong>100</strong> (Police) | <strong>101</strong> (Fire) | <strong>102</strong> (Ambulance)
+                    </p>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h4>🚀 Quick Questions</h4>
+                    <button class="quick-btn" onclick="sendQuickMessage('What are common cold remedies?')">
+                        🤧 Cold Remedies
+                    </button>
+                    <button class="quick-btn" onclick="sendQuickMessage('How to improve immunity naturally?')">
+                        🛡️ Boost Immunity
+                    </button>
+                    <button class="quick-btn" onclick="sendQuickMessage('Home remedies for headache')">
+                        🤕 Headache Relief
+                    </button>
+                    <button class="quick-btn" onclick="sendQuickMessage('Healthy diet tips for Kathmandu weather')">
+                        🥗 Diet Tips
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="chatbot-card">
+                <h2>🤖 Health Guidance Chatbot - स्वास्थ्य सल्लाहकार</h2>
+                <p class="header-description">
+                    Welcome to your personal AI health assistant! Ask questions about common illnesses, get home remedy suggestions, wellness tips, and health guidance specifically tailored for life in Kathmandu Valley. Our chatbot combines modern medical knowledge with traditional Nepali health practices.
+                </p>
+            </div>
+
+            <!-- Chat Container -->
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Welcome Message -->
+                    <div class="message bot-message">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content">
+                            <div class="message-text">
+                                नमस्ते! I'm your AI Health Assistant. I can help you with:
+                                <br><br>
+                                • Common illness symptoms and remedies
+                                <br>• Traditional Nepali home remedies
+                                <br>• Wellness and nutrition tips
+                                <br>• Health advice for Kathmandu's climate
+                                <br>• General medical guidance
+                                <br><br>
+                                What health question can I help you with today?
+                            </div>
+                            <div class="message-time">Just now</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input 
+                            type="text" 
+                            id="chatInput" 
+                            placeholder="Ask about symptoms, remedies, or health tips..."
+                            maxlength="500"
+                        >
+                        <button id="sendButton" onclick="sendMessage()">
+                            <span class="send-icon">📤</span>
+                        </button>
+                    </div>
+                    <div class="input-footer">
+                        <span class="char-count" id="charCount">0/500</span>
+                        <span class="disclaimer">⚠️ For emergencies, call 102</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Tips Section -->
+            <div class="health-tips-section">
+                <div class="chatbot-card">
+                    <h3>💡 Daily Health Tips - दैनिक स्वास्थ्य सुझाव</h3>
+                    <div class="tips-grid">
+                        <div class="tip-item">
+                            <h4>🌅 Morning Routine</h4>
+                            <p>Start your day with warm lemon water and light stretching to boost metabolism and flexibility.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>💧 Stay Hydrated</h4>
+                            <p>Drink 8-10 glasses of filtered water daily, especially important in Kathmandu's dry climate.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>🧘‍♀️ Stress Management</h4>
+                            <p>Practice 10 minutes of meditation or deep breathing to manage daily stress and anxiety.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>🥗 Balanced Diet</h4>
+                            <p>Include local seasonal fruits and vegetables in your diet for optimal nutrition and immunity.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>😴 Quality Sleep</h4>
+                            <p>Maintain 7-8 hours of sleep schedule. Avoid screens 1 hour before bedtime for better rest.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>🚶‍♀️ Daily Movement</h4>
+                            <p>Take a 30-minute walk daily, preferably in the morning when air quality is better.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="chatbot.js"></script>
+</body>
+</html>

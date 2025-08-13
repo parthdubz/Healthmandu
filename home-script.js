@@ -199,7 +199,7 @@ async function fetchWeatherData() {
 // Fetch AQI Data using World Air Quality Index API
 async function fetchAQIData() {
   try {
-    const response = await fetch("https://api.waqi.info/feed/kathmandu/?token=3a4de3c409e5e4a8dfebed640fbec023e748e572")
+    const response = await fetch("https://api.waqi.info/feed/patna/?token=3a4de3c409e5e4a8dfebed640fbec023e748e572")
     const data = await response.json()
 
     if (data.status === "ok" && data.data) {
