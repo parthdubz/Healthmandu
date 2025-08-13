@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Healthmandu • Mind & Mood Module</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f172a;
+      --panel-2:#111827;
+      --muted:#94a3b8;
+      --text:#e5e7eb;
+      --brand:#22d3ee; /* cyan-400 */
+      --brand-2:#a78bfa; /* violet-300 */
+      --accent:#34d399; /* emerald-400 */
+      --danger:#f43f5e; /* rose-500 */
+      --warning:#f59e0b; /* amber-500 */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(167,139,250,.18), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(34,211,238,.18), transparent 60%),
+        linear-gradient(180deg, #0b1220, #0b1220);
+      color:var(--text); font-family:'DM Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    .container{max-width:1200px; margin:40px auto; padding:0 20px}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:20px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:20px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.35);
+      backdrop-filter: blur(8px);
+    }
+    .title{
+      font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.2px;
+    }
+    header.hero{display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:20px}
+    .badge{font-size:12px; padding:6px 10px; border-radius:999px; color:#05202a; background:linear-gradient(90deg, var(--brand), var(--brand-2)); font-weight:700}
+    .subtitle{color:var(--muted); margin-top:6px}
+    /* Mood picker */
+    .mood-picker{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .mood-btn{
+      width:54px; height:54px; border-radius:14px; border:1px solid rgba(255,255,255,.08);
+      display:grid; place-items:center; background:rgba(255,255,255,0.03); cursor:pointer; font-size:26px;
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow:0 4px 10px rgba(0,0,0,.25);
+    }
+    .mood-btn:hover{transform:translateY(-2px); border-color:rgba(255,255,255,.18)}
+    .mood-btn.active{outline:2px solid transparent; border-color:transparent; background:linear-gradient(180deg, rgba(34,211,238,.25), rgba(167,139,250,.18)); box-shadow:0 6px 18px rgba(34,211,238,.35)}
+    .tip{font-size:14px; color:var(--muted)}
+    /* Meditation */
+    .media{
+      display:flex; gap:16px; align-items:center
+    }
+    .media .cover{
+      width:72px; height:72px; border-radius:16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); display:grid; place-items:center; font-size:30px;
+    }
+    .media .controls{display:flex; gap:10px}
+    .btn{
+      appearance:none; border:none; background:rgba(255,255,255,.06); color:var(--text);
+      padding:10px 14px; border-radius:12px; font-weight:700; cursor:pointer; transition:transform .12s ease, background .2s ease, box-shadow .2s ease;
+      border:1px solid rgba(255,255,255,.08)
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.1)}
+    .btn.primary{background:linear-gradient(90deg, var(--brand), var(--brand-2)); color:#041016}
+    .btn.ghost{background:transparent}
+    .progress{height:8px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden}
+    .progress>span{display:block; height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--brand)); transition:width .2s linear}
+    /* Breathing */
+    .breath{display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:center}
+    .bubble{
+      width:160px; height:160px; border-radius:999px; background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.35), rgba(255,255,255,.08) 60%, rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08); box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    .breath .pattern{font-size:13px; color:var(--muted)}
+    /* Journal */
+    .journal{display:flex; flex-direction:column; gap:10px}
+    textarea{width:100%; min-height:120px; resize:vertical; border-radius:12px; padding:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); color:var(--text)}
+    .entries{display:flex; flex-direction:column; gap:10px; max-height:220px; overflow:auto}
+    .entry{padding:12px; border-radius:12px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); font-size:14px}
+    .entry small{display:block; color:var(--muted); margin-top:6px}
+    /* Challenges */
+    .days{display:grid; grid-template-columns:repeat(7,1fr); gap:8px}
+    .day{
+      aspect-ratio:1/1; border-radius:12px; background:rgba(255,255,255,.03); display:grid; place-items:center; font-weight:700; color:var(--muted); border:1px solid rgba(255,255,255,.08); cursor:pointer; transition:transform .14s ease, background .2s ease
+    }
+    .day.done{background:linear-gradient(180deg, rgba(52,211,153,.25), rgba(34,197,94,.25)); color:#062116; border-color:rgba(52,211,153,.45)}
+    .streak{font-size:14px; color:var(--muted)}
+    /* Directory */
+    .list{display:grid; grid-template-columns:repeat(2, 1fr); gap:12px}
+    .person{display:flex; gap:12px; align-items:center; padding:10px; border-radius:14px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08)}
+    .avatar{width:44px; height:44px; border-radius:999px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); display:grid; place-items:center; font-weight:800; color:#041016}
+    .person small{color:var(--muted)}
+    .helplines{display:flex; flex-direction:column; gap:8px}
+    .helplines a{color:var(--text); text-decoration:none}
+    .note{font-size:12px; color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      .list{grid-template-columns:1fr}
+    }
+
+    .navbar {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+.logo-subtitle {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  margin-top: -2px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-links a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.nav-links a:hover::before {
+  left: 100%;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+  </style>
+</head>
+<body>
+      <nav class="navbar animate-slide-down">
+    <div class="nav-container">
+      <div class="logo">
+        <h1>Healthmandu</h1>
+        <span class="logo-subtitle">काठमाडौं स्वास्थ्य सेवा</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html" >Dashboard</a></li>
+        <li><a href="fitness-tracker.html">fitness-tracker</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">सहायता</a></li>
+        <li><a href="#" onclick="logout()" class="logout-btn">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <header class="hero">
+      <div>
+        <div class="badge">Mind & Mood</div>
+        <h1 class="title" style="margin:10px 0 6px; font-size:34px">Because wellness is more than physical health</h1>
+        <p class="subtitle">Daily check‑ins, guided meditation, breathing practice, journaling, challenges, and quick access to support — crafted for Kathmandu.</p>
+      </div>
+      <div class="card" style="min-width:290px; max-width:380px">
+        <div class="tip"><i class="fa-solid fa-lightbulb"></i> Tip of the day</div>
+        <p id="tipText" style="margin:8px 0 0; font-weight:600">Take a 5‑minute breathing break every 2 hours. Your focus will thank you.</p>
+      </div>
+    </header>
+
+    <!-- Row 1: Mood + Meditation + Breathing -->
+    <section class="grid" aria-label="Mind & Mood tools">
+      <div class="card" style="grid-column: span 5">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px">
+          <h2 class="title" style="font-size:20px">How are you feeling today?</h2>
+          <span class="tip">Logged moods feed your trends</span>
+        </div>
+        <div class="mood-picker" role="radiogroup" aria-label="Mood selector">
+          <button class="mood-btn" data-mood="5" aria-label="Very happy">😄</button>
+          <button class="mood-btn" data-mood="4" aria-label="Happy">🙂</button>
+          <button class="mood-btn" data-mood="3" aria-label="Neutral">😐</button>
+          <button class="mood-btn" data-mood="2" aria-label="Sad">🙁</button>
+          <button class="mood-btn" data-mood="1" aria-label="Very sad">😢</button>
+          <button id="saveMood" class="btn" style="margin-left:auto"><i class="fa-solid fa-check"></i> Save mood</button>
+        </div>
+        <div style="margin-top:16px">
+          <canvas id="moodChart" height="130"></canvas>
+        </div>
+      </div>
+
+      <div class="card" style="grid-column: span 4">
+        <h2 class="title" style="font-size:20px; margin-bottom:10px">Guided Meditation</h2>
+        <div class="media">
+          <div class="cover" aria-hidden="true"><i class="fa-solid fa-spa"></i></div>
+          <div style="flex:1">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px">
+              <strong id="trackTitle">Calm Start – 5 min</strong>
+              <div class="controls">
+                <button id="prev" class="btn ghost" aria-label="Previous"><i class="fa-solid fa-backward"></i></button>
+                <button id="play" class="btn primary" aria-label="Play/Pause"><i class="fa-solid fa-play"></i></button>
+                <button id="next" class="btn ghost" aria-label="Next"><i class="fa-solid fa-forward"></i></button>
+              </div>
+            </div>
+            <div class="progress" aria-label="Progress"><span id="progressBar"></span></div>
+            <div class="tip" id="trackMeta" style="margin-top:6px">Category: Stress Relief • Nepali & English</div>
+          </div>
+        </div>
+        <!-- Hidden audio element (use your own hosted files later) -->
+        <audio id="player">
+          <source src="https://cdn.pixabay.com/audio/2022/10/23/audio_9ef9b3b4b9.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <div class="card" style="grid-column: span 3">
+        <h2 class="title" style="font-size:20px; margin-bottom:10px">Breathing Practice (4–7–8)</h2>
+        <div class="breath">
+          <div class="bubble" id="bubble" aria-label="Breathing bubble"></div>
+          <div class="pattern"><span id="phase">Ready</span> • <span id="timer">00</span>s</div>
+          <div>
+            <button id="startBreath" class="btn primary"><i class="fa-solid fa-wind"></i> Start</button>
+            <button id="stopBreath" class="btn" style="margin-left:8px"><i class="fa-solid fa-square"></i> Stop</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Row 2: Journal + Challenges -->
+    <section class="grid" style="margin-top:20px">
+      <div class="card journal" style="grid-column: span 6">
+        <div style="display:flex; align-items:center; justify-content:space-between">
+          <h2 class="title" style="font-size:20px">Mood Journal & Gratitude</h2>
+          <button id="saveEntry" class="btn"><i class="fa-solid fa-bookmark"></i> Save entry</button>
+        </div>
+        <textarea id="journalText" placeholder="Write a short note. What went well today? What are you grateful for? (Saved locally)"></textarea>
+        <div class="entries" id="entries"></div>
+      </div>
+
+      <div class="card" style="grid-column: span 6">
+        <div style="display:flex; align-items:center; justify-content:space-between">
+          <h2 class="title" style="font-size:20px">21‑Day Mindfulness Challenge</h2>
+          <span class="streak">Streak: <strong id="streak">0</strong> days</span>
+        </div>
+        <div class="days" id="days"></div>
+        <div style="display:flex; gap:8px; margin-top:12px">
+          <button id="resetChallenge" class="btn"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+          <button id="celebrate" class="btn primary"><i class="fa-solid fa-burst"></i> Celebrate</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Row 3: Directory + Helplines -->
+    <section class="grid" style="margin-top:20px">
+      <div class="card" style="grid-column: span 7">
+        <h2 class="title" style="font-size:20px; margin-bottom:10px">Counselor Directory (Sample)</h2>
+        <div class="list" id="directory"></div>
+        <p class="note" style="margin-top:8px">Note: Replace with your verified local directory / booking links.</p>
+      </div>
+      <div class="card" style="grid-column: span 5">
+        <h2 class="title" style="font-size:20px; margin-bottom:10px">Quick Support</h2>
+        <div class="helplines">
+          <a class="btn" href="#" id="addHelplines"><i class="fa-solid fa-phone"></i> Add your local helpline buttons here</a>
+          <a class="btn" href="mailto:support@healthmandu.example"><i class="fa-solid fa-envelope"></i> Email support</a>
+          <a class="btn" href="#chat" onclick="alert('Hook this to your live chat!')"><i class="fa-solid fa-comment-dots"></i> Open live chat</a>
+        </div>
+        <p class="note" style="margin-top:8px">Safety: Always display accurate, verified numbers for crisis help within Nepal. Add emergency disclaimers as needed.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ===== Utilities =====
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+    const store = {
+      get(k, fallback){ try{ return JSON.parse(localStorage.getItem(k)) ?? fallback }catch(e){ return fallback } },
+      set(k,v){ localStorage.setItem(k, JSON.stringify(v)) }
+    }
+
+    // ===== Tip of the day (rotating) =====
+    const tips = [
+      'Take a 5‑minute breathing break every 2 hours. Your focus will thank you.',
+      'Short walk, big impact: 10 minutes of walking can lift your mood.',
+      'Try a 30‑second cold splash on your face to reset stress.',
+      'Write down 3 things you are grateful for today.',
+      'Screen break! 20‑20‑20: every 20 minutes, look 20 feet away for 20 seconds.'
+    ];
+    let tipIndex = Math.floor(Math.random()*tips.length);
+    function rotateTip(){ tipIndex = (tipIndex+1)%tips.length; $('#tipText').textContent = tips[tipIndex]; }
+    setInterval(rotateTip, 8000);
+
+    // ===== Mood Picker & Chart =====
+    const moodButtons = $$('.mood-btn');
+    let selectedMood = null;
+    moodButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        moodButtons.forEach(b=>b.classList.remove('active'))
+        btn.classList.add('active');
+        selectedMood = Number(btn.dataset.mood);
+        gsap.fromTo(btn, {y:-2, scale:1.0}, {y:-6, scale:1.08, yoyo:true, repeat:1, duration:.16, ease:'power1.out'});
+      })
+    })
+    const MOOD_KEY = 'hm_moods_v1';
+    const defaultSeries = Array(7).fill(null).map((_,i)=>({ day: i, mood: 3 }));
+    let moodSeries = store.get(MOOD_KEY, defaultSeries);
+
+    const ctx = document.getElementById('moodChart');
+    const moodChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [{
+          label: 'Mood (1‑5)',
+          data: moodSeries.map(p=>p.mood),
+          tension: .35,
+          borderWidth: 3,
+          fill: true,
+          borderColor: getComputedStyle(document.documentElement).getPropertyValue('--brand').trim(),
+          backgroundColor: 'rgba(34,211,238,0.18)',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        scales:{
+          y:{ min:1, max:5, ticks:{ stepSize:1 }, grid:{ color:'rgba(255,255,255,.08)'}},
+          x:{ grid:{ color:'rgba(255,255,255,.04)'} }
+        },
+        plugins:{ legend:{ display:false } }
+      }
+    });
+
+    function updateTipByMood(m){
+      const advice = {
+        5: 'You\'re glowing! Keep the momentum — share a kind word with someone today.',
+        4: 'Nice! A 5‑minute stretch will lock in those good vibes.',
+        3: 'Neutral is okay. Try a short walk or 10 deep breaths to reset.',
+        2: 'Tough day? Start a 3‑minute meditation and write one gratitude note.',
+        1: 'Sending support. Breathe 4‑7‑8 and consider reaching out to someone you trust.'
+      }
+      $('#tipText').textContent = advice[m] || tips[tipIndex];
+    }
+
+    $('#saveMood').addEventListener('click', ()=>{
+      if(!selectedMood){
+        gsap.to('#saveMood', {x:3, yoyo:true, repeat:5, duration:.06});
+        return;
+      }
+      const now = new Date();
+      const day = now.getDay(); // 0=Sun..6=Sat
+      const idx = (day + 6) % 7; // make Monday index 0
+      moodSeries[idx] = { day: idx, mood: selectedMood };
+      store.set(MOOD_KEY, moodSeries);
+      moodChart.data.datasets[0].data = moodSeries.map(p=>p.mood);
+      moodChart.update();
+      updateTipByMood(selectedMood);
+      gsap.fromTo('#saveMood', {scale:1}, {scale:1.08, duration:.15, yoyo:true, repeat:1});
+    })
+
+    // ===== Meditation Player (simple playlist) =====
+    const playlist = [
+      { title:'Calm Start – 5 min', src:'https://cdn.pixabay.com/audio/2022/10/23/audio_9ef9b3b4b9.mp3', meta:'Stress Relief • Soft pads'},
+      { title:'Focus Flow – 7 min', src:'https://cdn.pixabay.com/audio/2024/01/19/audio_1c38481994.mp3', meta:'Focus • Gentle synth'},
+      { title:'Sleep Ease – 10 min', src:'https://cdn.pixabay.com/audio/2022/03/10/audio_38f5b2c7f4.mp3', meta:'Sleep • Slow tones'},
+    ];
+    const player = $('#player');
+    const trackTitle = $('#trackTitle');
+    const trackMeta = $('#trackMeta');
+    const progressBar = $('#progressBar');
+    let trackIndex = 0; let playing = false; let raf;
+
+    function loadTrack(i){
+      trackIndex = (i+playlist.length)%playlist.length;
+      const t = playlist[trackIndex];
+      trackTitle.textContent = t.title;
+      trackMeta.textContent = `Category: ${t.meta} • Nepali & English`;
+      player.src = t.src;
+      progressBar.style.width = '0%';
+    }
+    function togglePlay(){
+      if(playing){ player.pause(); } else { player.play(); }
+    }
+    $('#play').addEventListener('click', togglePlay);
+    $('#prev').addEventListener('click', ()=>{ loadTrack(trackIndex-1); if(playing) player.play(); });
+    $('#next').addEventListener('click', ()=>{ loadTrack(trackIndex+1); if(playing) player.play(); });
+
+    player.addEventListener('play', ()=>{ playing=true; $('#play').innerHTML='<i class="fa-solid fa-pause"></i>'; animateCover(true); loopProgress(); });
+    player.addEventListener('pause', ()=>{ playing=false; $('#play').innerHTML='<i class="fa-solid fa-play"></i>'; animateCover(false); cancelAnimationFrame(raf); });
+    player.addEventListener('ended', ()=>{ loadTrack(trackIndex+1); player.play(); });
+
+    function loopProgress(){
+      const pct = (player.currentTime / player.duration) * 100;
+      progressBar.style.width = (isFinite(pct)? pct : 0) + '%';
+      raf = requestAnimationFrame(loopProgress);
+    }
+    let coverTween;
+    function animateCover(on){
+      coverTween && coverTween.kill();
+      coverTween = gsap.to('.cover', { rotate:on? 360:0, duration: on? 18:0.6, repeat: on? -1:0, ease:'linear' });
+    }
+
+    loadTrack(0);
+
+    // ===== Breathing Bubble (4-7-8) =====
+    const bubble = $('#bubble');
+    const phaseEl = $('#phase');
+    const timerEl = $('#timer');
+    let breathTL;
+
+    function startBreathing(){
+      stopBreathing();
+      let seconds = 0; timerEl.textContent = '00';
+      breathTL = gsap.timeline({ repeat:-1, defaults:{ ease:'sine.inOut' } });
+      breathTL
+        .call(()=>{ phaseEl.textContent = 'Inhale'; seconds=0; })
+        .to(bubble, { duration:4, scale:1.25, boxShadow:'0 25px 80px rgba(34,211,238,.45)'} )
+        .call(()=>{ phaseEl.textContent = 'Hold'; seconds=0; })
+        .to(bubble, { duration:7, scale:1.25 })
+        .call(()=>{ phaseEl.textContent = 'Exhale'; seconds=0; })
+        .to(bubble, { duration:8, scale:1.0, boxShadow:'0 20px 60px rgba(0,0,0,.35)'} );
+      // timer counter per phase
+      const int = setInterval(()=>{
+        if(!breathTL || !breathTL.isActive()) return clearInterval(int);
+        seconds++; timerEl.textContent = String(seconds).padStart(2,'0');
+      }, 1000);
+    }
+    function stopBreathing(){ breathTL && breathTL.kill(); phaseEl.textContent='Ready'; timerEl.textContent='00'; gsap.to(bubble, {scale:1, duration:.3}); }
+    $('#startBreath').addEventListener('click', startBreathing);
+    $('#stopBreath').addEventListener('click', stopBreathing);
+
+    // ===== Journal =====
+    const ENTRY_KEY = 'hm_journal_v1';
+    function renderEntries(){
+      const entries = store.get(ENTRY_KEY, []);
+      const wrap = $('#entries');
+      wrap.innerHTML = entries.map(e=>`<div class="entry">${e.text.replace(/</g,'&lt;')}<small>${new Date(e.time).toLocaleString()}</small></div>`).join('');
+    }
+    $('#saveEntry').addEventListener('click', ()=>{
+      const text = $('#journalText').value.trim();
+      if(!text){ gsap.to('#journalText', {x:3, yoyo:true, repeat:5, duration:.06}); return; }
+      const entries = store.get(ENTRY_KEY, []);
+      entries.unshift({ text, time: Date.now() });
+      store.set(ENTRY_KEY, entries.slice(0,50));
+      $('#journalText').value='';
+      renderEntries();
+      burstConfetti();
+    })
+
+    // ===== Challenge 21 days =====
+    const CHALLENGE_KEY = 'hm_challenge_v1';
+    const daysWrap = $('#days');
+    let challenge = store.get(CHALLENGE_KEY, Array.from({length:21},(_,i)=>({day:i+1,done:false})));
+    function renderDays(){
+      daysWrap.innerHTML = '';
+      challenge.forEach((d,i)=>{
+        const el = document.createElement('div');
+        el.className = 'day' + (d.done? ' done' : '');
+        el.textContent = d.day;
+        el.role = 'button'; el.tabIndex=0; el.ariaLabel = `Day ${d.day}`;
+        el.addEventListener('click', ()=>{ d.done=!d.done; store.set(CHALLENGE_KEY, challenge); renderDays(); updateStreak(); });
+        el.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); el.click(); }});
+        daysWrap.appendChild(el);
+      })
+    }
+    function updateStreak(){
+      const streak = challenge.reduce((s,d)=> d.done? s+1: s, 0);
+      $('#streak').textContent = streak;
+    }
+    $('#resetChallenge').addEventListener('click', ()=>{
+      if(confirm('Reset challenge progress?')){
+        challenge = Array.from({length:21},(_,i)=>({day:i+1,done:false}));
+        store.set(CHALLENGE_KEY, challenge); renderDays(); updateStreak();
+      }
+    })
+    $('#celebrate').addEventListener('click', burstConfetti);
+
+    // Simple confetti burst
+    function burstConfetti(){
+      const count = 120;
+      for(let i=0;i<count;i++){
+        const d = document.createElement('div');
+        d.style.position='fixed'; d.style.left=(window.innerWidth/2)+'px'; d.style.top='20%'; d.style.width='6px'; d.style.height='10px';
+        d.style.background = `hsl(${Math.random()*360}, 80%, 60%)`; d.style.borderRadius='2px'; d.style.zIndex=9999; d.style.pointerEvents='none';
+        document.body.appendChild(d);
+        const dx = (Math.random()-0.5)*window.innerWidth;
+        const dy = 120 + Math.random()*260;
+        gsap.to(d, { x:dx, y:dy, rotate:Math.random()*720, duration:1.2+Math.random()*0.8, ease:'power2.out', onComplete:()=>d.remove() });
+      }
+    }
+
+    // ===== Directory (sample data) =====
+    const people = [
+      { name:'A. Sharma, MPhil (Counseling)', org:'Kathmandu Wellness Center', mode:'In‑person & Online' },
+      { name:'P. Gurung, PsyD', org:'MindCare Nepal', mode:'Online' },
+      { name:'S. Karki, M.Sc. Clinical Psych.', org:'City Hospital Counseling', mode:'In‑person' },
+      { name:'R. Lama, MA Psychology', org:'Tranquil Minds', mode:'In‑person & Online' },
+    ];
+    function renderDirectory(){
+      const wrap = $('#directory'); wrap.innerHTML='';
+      people.forEach(p=>{
+        const card = document.createElement('div'); card.className='person';
+        const initials = p.name.split(' ').map(x=>x[0]).slice(0,2).join('');
+        card.innerHTML = `<div class="avatar">${initials}</div>
+          <div style="flex:1">
+            <strong>${p.name}</strong><br/>
+            <small>${p.org} • ${p.mode}</small>
+          </div>
+          <button class="btn" onclick="alert('Hook to booking flow')"><i class="fa-solid fa-calendar-check"></i> Book</button>`;
+        wrap.appendChild(card);
+      })
+    }
+
+    // ===== On load animations =====
+    function reveal(){
+      gsap.from('.card', { y:18, opacity:0, duration:.7, stagger:.06, ease:'power3.out' });
+      gsap.from('.badge', { y:-10, opacity:0, duration:.6, ease:'back.out(1.7)'});
+      gsap.from('.title', { opacity:0, y:6, duration:.6 });
+    }
+
+    // init
+    renderEntries();
+    renderDays();
+    updateStreak();
+    renderDirectory();
+    reveal();
+  </script>
+</body>
+</html>
