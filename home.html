@@ -9,6 +9,99 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="home.css" />
+  <!-- AI Chatbot Styles -->
+  <style>
+    :root{
+      --hm-green:#16a34a;
+      --hm-green-dark:#15803d;
+      --hm-bg:#0b1220;
+      --hm-card:#111827cc;
+      --hm-text:#e5e7eb;
+      --hm-light:#f3f4f6;
+      --hm-muted:#9ca3af;
+      --shadow: 0 10px 25px rgba(0,0,0,.25);
+      --radius:16px;
+    }
+    /* FAB toggle */
+    .hm-fab{
+      position:fixed; right:16px; bottom:16px;
+      width:56px; height:56px; border-radius:999px;
+      background:var(--hm-green); color:white; display:grid; place-items:center;
+      box-shadow:var(--shadow); cursor:pointer; border:none; outline:none;
+      transition:transform .18s ease, background .2s ease;
+      z-index:999999;
+    }
+    .hm-fab:hover{ transform:translateY(-2px); background:var(--hm-green-dark) }
+    .hm-fab .dot{position:absolute; top:-2px; right:-2px; width:12px; height:12px; border-radius:999px; background:#ef4444; box-shadow:0 0 0 2px white}
+    /* Panel */
+    .hm-panel{
+      position:fixed; right:16px; bottom:84px;
+      width:280px; height:360px; max-height:70vh;
+      background:linear-gradient(180deg,#0f172acc,#0b1220e6);
+      backdrop-filter: blur(10px);
+      border:1px solid #1f2937; color:var(--hm-text);
+      border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+      display:none; flex-direction:column; z-index:999998;
+      animation: hm-pop .18s ease;
+    }
+    @keyframes hm-pop { from{ transform:scale(.96); opacity:.0 } to{ transform:scale(1); opacity:1 } }
+    .hm-header{
+      padding:10px 12px; display:flex; align-items:center; gap:8px;
+      background:#0b1220; border-bottom:1px solid #1f2937;
+    }
+    .hm-header .logo{
+      width:26px; height:26px; display:grid; place-items:center; border-radius:8px;
+      background: radial-gradient(120% 120% at 30% 20%, #22c55e 0%, #16a34a 40%, #065f46 100%);
+    }
+    .hm-title{font-weight:700; font-size:14px; line-height:1}
+    .hm-sub{font-size:11px; color:var(--hm-muted)}
+    .hm-body{flex:1; display:flex; flex-direction:column; min-height:0}
+    .hm-msgs{flex:1; overflow-y:auto; padding:10px 10px 6px 10px; display:flex; flex-direction:column; gap:8px;}
+    .hm-msg{
+      max-width:86%; padding:8px 10px; border-radius:12px; font-size:13px; line-height:1.35;
+      box-shadow:0 2px 8px rgba(0,0,0,.15);
+      white-space:pre-wrap; word-wrap:break-word;
+    }
+    .hm-bot{ background:#0f172a; border:1px solid #1f2937 }
+    .hm-user{ background:#DCFCE7; color:#052e16; align-self:flex-end }
+    .hm-chipwrap{ display:flex; gap:6px; flex-wrap:wrap; margin-top:2px }
+    .hm-chip{
+      font-size:11px; padding:4px 8px; border-radius:999px; background:#111827; color:#e5e7eb; border:1px solid #1f2937; cursor:pointer;
+    }
+    .hm-chip:hover{ background:#0b1220 }
+    .hm-input{
+      border-top:1px solid #1f2937; padding:8px; background:#0b1220; display:flex; gap:6px; align-items:center;
+    }
+    .hm-text{
+      flex:1; height:34px; border-radius:10px; border:1px solid #1f2937; outline:none;
+      background:#0f172a; color:var(--hm-light); padding:0 10px;
+      font-size:13px;
+    }
+    .hm-send{
+      height:34px; padding:0 10px; border-radius:10px; border:none; cursor:pointer;
+      background:var(--hm-green); color:white; font-weight:600;
+    }
+    .hm-send:hover{ background:var(--hm-green-dark) }
+    /* Autocomplete */
+    .hm-suggest{
+      position:absolute; left:8px; right:8px; bottom:56px;
+      background:#0b1220; border:1px solid #1f2937; border-radius:10px; overflow:hidden; display:none; max-height:160px; overflow-y:auto; z-index:10;
+    }
+    .hm-suggest button{
+      all:unset; display:block; width:100%; font-size:13px; color:#e5e7eb;
+      padding:8px 10px; cursor:pointer;
+    }
+    .hm-suggest button:hover{ background:#0f172a }
+    /* Tiny scrollbar */
+    .hm-msgs::-webkit-scrollbar, .hm-suggest::-webkit-scrollbar{ width:6px }
+    .hm-msgs::-webkit-scrollbar-thumb, .hm-suggest::-webkit-scrollbar-thumb{ background:#1f2937; border-radius:999px }
+    /* Link style inside bot message */
+    .hm-note{ font-size:11px; color:#9ca3af; margin-top:2px }
+    /* Responsive safety */
+    @media (max-width:420px){
+      .hm-panel{ right:12px; bottom:78px; width:88vw; height:60vh }
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar animate-slide-down">
@@ -297,7 +390,339 @@
     </main>
   </div>
 
+  <!-- AI Chatbot Integration -->
+  <!-- Floating Action Button -->
+  <button id="hmFab" class="hm-fab" aria-label="Open Healthmandu Chat" title="Healthmandu Chat">
+    <!-- chat icon -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M21 12c0 4.418-4.03 8-9 8-1.3 0-2.536-.23-3.66-.65L3 20l1.36-3.13C3.5 15.6 3 13.85 3 12 3 7.582 7.03 4 12 4s9 3.582 9 8Z" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="9.25" cy="12" r="1" fill="white"/>
+      <circle cx="12" cy="12" r="1" fill="white"/>
+      <circle cx="14.75" cy="12" r="1" fill="white"/>
+    </svg>
+    <span class="dot" aria-hidden="true"></span>
+  </button>
+
+  <!-- Chat Panel -->
+  <section id="hmPanel" class="hm-panel" role="dialog" aria-label="Healthmandu Chat">
+    <header class="hm-header">
+      <div class="logo" aria-hidden="true">💚</div>
+      <div style="display:flex; flex-direction:column; gap:2px;">
+        <div class="hm-title">Healthmandu Chat</div>
+        <div class="hm-sub">Causes • Symptoms • Prevention</div>
+      </div>
+    </header>
+
+    <div class="hm-body">
+      <div id="hmMsgs" class="hm-msgs" aria-live="polite" aria-atomic="false"></div>
+
+      <!-- Suggestions dropdown -->
+      <div id="hmSuggest" class="hm-suggest" role="listbox" aria-label="Suggestions"></div>
+
+      <div class="hm-input" style="position:relative">
+        <input id="hmText" class="hm-text" type="text" placeholder="Type a disease e.g. dengue…" autocomplete="off" />
+        <button id="hmSend" class="hm-send">Send</button>
+      </div>
+    </div>
+  </section>
+
   <script src="home-script.js"></script>
   <script src="auth.js"></script>
+  
+  <!-- AI Chatbot Script -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const fab = document.getElementById('hmFab');
+    const panel = document.getElementById('hmPanel');
+    const msgs = document.getElementById('hmMsgs');
+    const input = document.getElementById('hmText');
+    const sendBtn = document.getElementById('hmSend');
+    const suggest = document.getElementById('hmSuggest');
+
+    if (!fab || !panel || !msgs || !input || !sendBtn || !suggest) {
+      console.error('Chatbot elements not found');
+      return;
+    }
+
+    let panelOpen = false;
+    let hasGreeted = false;
+
+    const DB = [
+      // Infectious
+      D('covid-19',['covid','coronavirus'], 'SARS-CoV-2 virus; spreads via respiratory droplets/aerosols and close contact.',
+        'Fever, dry cough, fatigue, sore throat, loss of taste/smell, shortness of breath.',
+        'Vaccination, mask in crowded/poorly ventilated places, isolate if sick, hand hygiene, ventilation.'),
+      D('influenza (flu)',['flu'],'Influenza viruses, seasonal spread via droplets/contact.',
+        'Fever, chills, body aches, cough, sore throat, headache, fatigue.',
+        'Annual flu shot, hand hygiene, stay home when ill.'),
+      D('common cold',['cold','rhinitis'],'Multiple respiratory viruses (rhinovirus etc.).',
+        'Runny/stuffy nose, sneezing, sore throat, mild cough, low-grade fever.',
+        'Hand hygiene, avoid close contact, rest and fluids.'),
+      D('pneumonia',[],'Infection of lungs by bacteria/viruses/fungi.',
+        'Cough with phlegm, fever, chest pain, breathlessness.',
+        'Vaccines (pneumococcal, flu), treat underlying illness, no smoking.'),
+      D('tuberculosis (tb)',['tb'],'Mycobacterium tuberculosis; airborne.',
+        'Persistent cough, weight loss, night sweats, fever, coughing blood.',
+        'Early diagnosis, full course of TB meds, masks/ventilation, BCG vaccine (childhood).'),
+      D('dengue',[],'Dengue virus via Aedes mosquitoes.',
+        'High fever, severe headache, retro-orbital pain, body/joint aches, rash.',
+        'Prevent bites (repellent, nets, long sleeves), remove standing water.'),
+      D('malaria',[],'Plasmodium parasites via Anopheles mosquito.',
+        'Fever with chills/sweats, headache, nausea, anemia.',
+        'Mosquito nets/repellent, prophylaxis in endemic areas, eliminate breeding sites.'),
+      D('chikungunya',[],'Virus via Aedes mosquitoes.',
+        'High fever, severe joint pain, rash, fatigue.',
+        'Prevent bites; community vector control.'),
+      D('zika',[],'Zika virus via Aedes mosquitoes; maternal-fetal transmission possible.',
+        'Mild fever, rash, conjunctivitis, joint pain; risk in pregnancy.',
+        'Avoid bites; pregnancy counseling in outbreak areas.'),
+      D('cholera',[],'Vibrio cholerae from contaminated water/food.',
+        'Profuse watery diarrhea, vomiting, dehydration, leg cramps.',
+        'Safe water, sanitation, oral rehydration, vaccines in high-risk settings.'),
+      D('typhoid fever',['typhoid'],'Salmonella Typhi via contaminated food/water.',
+        'Prolonged fever, abdominal pain, constipation/diarrhea, rash (rose spots).',
+        'Safe food/water, hand hygiene, typhoid vaccination.'),
+      D('hepatitis A',[],'HAV via fecal-oral route.',
+        'Fatigue, nausea, jaundice, dark urine.',
+        'Hepatitis A vaccine, safe food/water, hygiene.'),
+      D('hepatitis B',[],'HBV via blood/body fluids; perinatal transmission.',
+        'Often asymptomatic; possible jaundice, fatigue; can become chronic.',
+        'Vaccination, safe sex, sterile needles, screen blood products.'),
+      D('hepatitis C',[],'HCV via blood exposure.',
+        'Often silent; chronic infection may lead to liver disease.',
+        'Avoid needle sharing, screen blood; treat with antivirals.'),
+      D('measles',[],'Measles virus; highly contagious.',
+        'High fever, cough, runny nose, red eyes, rash.',
+        'MMR vaccination, isolate cases.'),
+      D('mumps',[],'Mumps virus.',
+        'Parotid gland swelling, fever, headache, muscle aches.',
+        'MMR vaccination.'),
+      D('rubella',[],'Rubella virus.',
+        'Mild fever, rash; risk to fetus if pregnant.',
+        'MMR vaccination.'),
+      D('chickenpox (varicella)',['chicken pox','varicella'],'Varicella-zoster virus.',
+        'Itchy blister-like rash, fever, tiredness.',
+        'Varicella vaccine; avoid contact until lesions crust.'),
+      D('whooping cough (pertussis)',['pertussis','whooping cough'],'Bordetella pertussis.',
+        'Severe coughing fits with "whoop", vomiting after cough.',
+        'DTaP/Tdap vaccination; protect infants.'),
+      D('polio',[],'Poliovirus via fecal-oral.',
+        'Often mild; can cause paralysis.',
+        'Polio vaccination.'),
+      D('tetanus',[],'Clostridium tetani from contaminated wounds.',
+        'Muscle stiffness, lockjaw, spasms.',
+        'Tetanus vaccination, proper wound care.'),
+      D('rabies',[],'Rabies virus via animal bites.',
+        'Tingling at bite, fever; progresses to neurological symptoms (fatal if untreated).',
+        'Immediate wound washing, post-exposure vaccination; vaccinate pets.'),
+      D('leptospirosis',[],'Leptospira bacteria via water/soil contaminated with animal urine.',
+        'Fever, headache, muscle pain; severe cases affect kidneys/liver.',
+        'Avoid contaminated water, protective gear, rodent control.'),
+      D('japanese encephalitis',[],'JE virus via Culex mosquitoes.',
+        'Fever, headache; can progress to encephalitis, seizures.',
+        'JE vaccination, mosquito prevention.'),
+      D('hand, foot and mouth disease',['hfm','hfmd'],'Enteroviruses (e.g., Coxsackie).',
+        'Fever, mouth sores, rash on hands/feet.',
+        'Hand hygiene, avoid close contact, clean surfaces.'),
+      D('rotavirus',[],'Rotavirus, mainly in young children.',
+        'Severe diarrhea, vomiting, fever, dehydration.',
+        'Rotavirus vaccination, rehydration, hygiene.'),
+      D('norovirus',[],'Highly contagious virus via food/water/surfaces.',
+        'Vomiting, watery diarrhea, cramps.',
+        'Hand hygiene, disinfect surfaces, safe food handling.'),
+      // Non-communicable & metabolic
+      D('hypertension (high blood pressure)',['high blood pressure','bp'],'Multifactorial; genetics, diet, inactivity, stress.',
+        'Often none; headaches, dizziness in severe cases.',
+        'Low-salt diet, exercise, healthy weight, meds as prescribed.'),
+      D('diabetes type 2',['diabetes','t2dm'],'Insulin resistance with relative deficiency.',
+        'Excess thirst/urination, fatigue, blurred vision; sometimes none.',
+        'Balanced diet, exercise, weight control, meds as advised.'),
+      D('diabetes type 1',['t1dm'],'Autoimmune destruction of pancreatic beta cells.',
+        'Rapid onset thirst/urination, weight loss.',
+        'Insulin therapy, glucose monitoring, education.'),
+      D('anemia (iron deficiency)',['anemia','iron deficiency'],'Low iron intake/loss.',
+        'Fatigue, pale skin, dizziness, brittle nails.',
+        'Iron-rich foods, supplements if advised, treat cause of blood loss.'),
+      D('asthma',[],'Inflamed/narrowed airways; triggers include allergens, pollution, exercise.',
+        'Wheezing, shortness of breath, chest tightness, cough (esp. at night).',
+        'Avoid triggers, inhaler as prescribed, action plan.'),
+      D('copd',[],'Chronic bronchitis/emphysema from smoking or pollutants.',
+        'Chronic cough, sputum, breathlessness.',
+        'Quit smoking, inhaled meds, pulmonary rehab, vaccines.'),
+      D('acute gastroenteritis',['diarrhea','food poisoning'],'Viruses/bacteria/toxins.',
+        'Sudden diarrhea, vomiting, cramps, fever.',
+        'Oral rehydration, safe food/water, hand hygiene.'),
+      D('urinary tract infection (uti)',['uti'],'Bacterial infection of urinary tract.',
+        'Burning urination, frequency, lower abdominal pain; fever if complicated.',
+        'Hydration, hygiene, timely antibiotics.'),
+      D('migraine',[],'Neurological disorder with genetic triggers.',
+        'Throbbing headache, nausea, light/sound sensitivity, aura in some.',
+        'Trigger management, sleep, hydration, prescribed medications.'),
+      D('depression',[],'Multifactorial: genetics, stress, neurochemistry.',
+        'Persistent low mood, loss of interest, sleep/appetite changes, suicidal thoughts.',
+        'Talk therapy, support, lifestyle, medications under medical care.'),
+      D('anxiety disorder',['anxiety'],'Excessive worry with physical symptoms.',
+        'Restlessness, palpitations, sweating, sleep issues.',
+        'Therapy, relaxation, sleep, exercise, meds if indicated.')
+    ];
+
+    // Popular chips (quick tap)
+    const POPULAR = [
+      'dengue','malaria','covid-19','influenza (flu)','tuberculosis (tb)',
+      'hypertension (high blood pressure)','diabetes type 2','asthma','uti','acute gastroenteritis'
+    ];
+
+    // --- UI helpers ------------------------------------------------------
+    function D(name, aliases, causes, symptoms, prevention){
+      return { key: name.toLowerCase(), name, aliases: (aliases||[]).map(a=>a.toLowerCase()), causes, symptoms, prevention };
+    }
+    function el(tag, cls, text){
+      const e = document.createElement(tag);
+      if(cls) e.className = cls;
+      if(text!=null) e.textContent = text;
+      return e;
+    }
+    function addMsg(text, type='bot'){
+      const bubble = el('div', 'hm-msg ' + (type==='user'?'hm-user':'hm-bot'));
+      bubble.textContent = text;
+      msgs.appendChild(bubble);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    function addBotRich(entry){
+      const wrap = el('div', 'hm-msg hm-bot');
+      const title = el('div', null, `🩺 ${entry.name}`);
+      title.style.fontWeight='700'; title.style.marginBottom='6px';
+      const causes = el('div', null, `📌 Causes: ${entry.causes}`);
+      const sym = el('div', null, `🤒 Symptoms: ${entry.symptoms}`);
+      const prev = el('div', null, `🛡️ Prevention: ${entry.prevention}`);
+      const note = el('div', 'hm-note', 'Educational info — not a diagnosis. See a clinician for persistent or severe symptoms.');
+
+      wrap.appendChild(title); wrap.appendChild(causes); wrap.appendChild(sym); wrap.appendChild(prev); wrap.appendChild(note);
+      msgs.appendChild(wrap);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    function greet(){
+      if(hasGreeted) return;
+      hasGreeted = true;
+      const g = el('div','hm-msg hm-bot');
+      g.innerHTML = `Namaste! 👋 Type a disease name to get <b>causes, symptoms, and prevention</b>.<div class="hm-chipwrap" id="hmChips"></div>`;
+      msgs.appendChild(g);
+      const chipWrap = g.querySelector('#hmChips');
+      POPULAR.forEach(n=>{
+        const b = el('button','hm-chip',n);
+        b.addEventListener('click',()=> { input.value = n; runQuery(); });
+        chipWrap.appendChild(b);
+      });
+    }
+
+    // --- Matching --------------------------------------------------------
+    function findEntry(qRaw){
+      if(!qRaw) return null;
+      const q = qRaw.trim().toLowerCase();
+      if(!q) return null;
+
+      // direct match by key or alias or contains start
+      let exact = DB.find(d => d.key===q || d.aliases.includes(q));
+      if(exact) return exact;
+
+      // startsWith / includes scoring
+      const scored = DB.map(d=>{
+        let score = 0;
+        if(d.key.startsWith(q)) score += 3;
+        if(d.key.includes(q)) score += 2;
+        if(d.aliases.some(a=>a.startsWith(q))) score += 2;
+        if(d.aliases.some(a=>a.includes(q))) score += 1;
+        return {d, score};
+      }).filter(o=>o.score>0).sort((a,b)=>b.score-a.score);
+
+      return scored.length ? scored[0].d : null;
+    }
+
+    function suggestions(q){
+      const L = q.trim().toLowerCase();
+      if(!L) return [];
+      const list = [];
+      for(const d of DB){
+        if(d.key.startsWith(L) || d.key.includes(L) || d.aliases.some(a=>a.startsWith(L))){
+          list.push(d);
+          if(list.length>=8) break;
+        }
+      }
+      return list;
+    }
+
+    // --- Suggest UI ------------------------------------------------------
+    function showSuggest(items){
+      suggest.innerHTML = '';
+      if(!items.length){ suggest.style.display='none'; return; }
+      for(const it of items){
+        const b = document.createElement('button');
+        b.setAttribute('role','option');
+        b.textContent = it.name;
+        b.onclick = ()=>{
+          input.value = it.name;
+          suggest.style.display='none';
+          runQuery();
+        };
+        suggest.appendChild(b);
+      }
+      suggest.style.display='block';
+    }
+
+    // --- Actions ---------------------------------------------------------
+    function runQuery(){
+      const q = input.value.trim();
+      if(!q) return;
+      addMsg(q,'user');
+
+      const entry = findEntry(q);
+      if(entry){
+        addBotRich(entry);
+      }else{
+        const nearest = suggestions(q).slice(0,5).map(x=>`• ${x.name}`).join('\n');
+        addMsg(`I couldn't find "${q}". Try these:\n${nearest || 'dengue, malaria, influenza (flu), tuberculosis (tb), diabetes type 2'}`);
+      }
+      input.value='';
+      suggest.style.display='none';
+    }
+
+    function togglePanel() {
+      panelOpen = !panelOpen;
+      
+      if(panelOpen) {
+        panel.style.display = 'flex';
+        greet();
+        input.focus();
+      } else {
+        panel.style.display = 'none';
+        suggest.style.display = 'none';
+      }
+    }
+
+    // --- Events ----------------------------------------------------------
+    fab.addEventListener('click', (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      togglePanel();
+    });
+
+    sendBtn.addEventListener('click', runQuery);
+    input.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ runQuery(); } });
+    input.addEventListener('input', ()=>{
+      const list = suggestions(input.value);
+      showSuggest(list);
+    });
+    
+    document.addEventListener('click', (e)=>{
+      if(panelOpen && !panel.contains(e.target) && !fab.contains(e.target)){
+        panelOpen = false;
+        panel.style.display='none';
+        suggest.style.display='none';
+      }
+    });
+
+    console.log('Healthmandu AI Chatbot initialized successfully');
+  });
+  </script>
 </body>
 </html>

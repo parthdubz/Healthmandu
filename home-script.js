@@ -73,7 +73,7 @@ document.querySelectorAll(".scroll-animate").forEach((el) => {
   observer.observe(el)
 })
 
-// Counter animation
+// Counter animation function
 function animateCounter(element, target, duration = 2000) {
   let start = 0
   const increment = target / (duration / 16)
@@ -196,198 +196,129 @@ async function fetchWeatherData() {
   }
 }
 
-// Counter animation
-function animateCounter(el, target) {
-  let count = 0;
-  const step = Math.ceil(target / 100);
-  const interval = setInterval(() => {
-    count += step;
-    if (count >= target) {
-      count = target;
-      clearInterval(interval);
-    }
-    el.textContent = count;
-  }, 20);
+// Create cloud element for AQI visualization
+function createCloud(card, left) {
+  const cloud = document.createElement("div")
+  cloud.className = "cloud"
+  cloud.style.width = 60 + Math.random() * 40 + "px"
+  cloud.style.height = 30 + Math.random() * 20 + "px"
+  cloud.style.top = Math.random() * 60 + "px"
+  cloud.style.left = left + "px"
+  cloud.style.animationDuration = 20 + Math.random() * 10 + "s"
+  card.appendChild(cloud)
 }
 
-// Create dynamic AQI visual
-// Animate counter function
-function animateCounter(element, target) {
-  let count = 0;
-  const step = target / 100;
-  const interval = setInterval(() => {
-    count += step;
-    if (count >= target) {
-      element.textContent = target;
-      clearInterval(interval);
-    } else {
-      element.textContent = Math.floor(count);
-    }
-  }, 20);
-}
-
-// Create cloud element
-function createCloud(card, top) {
-  const cloud = document.createElement("div");
-  cloud.className = "cloud";
-  cloud.style.top = `${top}px`;
-  cloud.style.left = `${-100 + Math.random() * 200}px`;
-  cloud.style.width = `${60 + Math.random() * 60}px`;
-  cloud.style.height = `${30 + Math.random() * 20}px`;
-  cloud.style.background = `rgba(200,200,200,${0.3 + Math.random()*0.3})`;
-  cloud.style.borderRadius = "50% 60% 50% 60%";
-  cloud.style.position = "absolute";
-  cloud.style.animation = `cloudMove ${20 + Math.random()*10}s linear infinite`;
-  card.appendChild(cloud);
-}
-
-// Create building element
+// Create building element for AQI visualization
 function createBuilding(card, left) {
-  const building = document.createElement("div");
-  building.className = "building";
-  building.style.width = `${30 + Math.random() * 20}px`;
-  building.style.height = `${50 + Math.random() * 70}px`;
-  building.style.left = `${left}px`;
-  building.style.bottom = `0px`;
-  building.style.position = "absolute";
-  building.style.background = "#444";
+  const building = document.createElement("div")
+  building.className = "building"
+  const height = 60 + Math.random() * 80
+  building.style.height = height + "px"
+  building.style.left = left + "px"
 
-  // optional small window lights
-  for(let i=0; i<3; i++){
-    if(Math.random()<0.5){
-      const light = document.createElement("div");
-      light.className = "building-light";
-      light.style.position = "absolute";
-      light.style.top = `${5 + Math.random()*40}px`;
-      light.style.left = `${5 + Math.random()*15}px`;
-      light.style.width = "4px";
-      light.style.height = "6px";
-      light.style.background = "yellow";
-      building.appendChild(light);
-    }
+  const lightsCount = Math.floor(Math.random() * 5)
+  for (let i = 0; i < lightsCount; i++) {
+    const light = document.createElement("div")
+    light.className = "building-light"
+    light.style.bottom = Math.random() * height + "px"
+    light.style.left = Math.random() * 30 + "px"
+    building.appendChild(light)
   }
 
-  card.appendChild(building);
+  card.appendChild(building)
 }
 
 // Update AQI visual elements based on value
-function animateCounter(element, target) {
-  let count = 0;
-  const increment = Math.ceil(target / 100);
-  const interval = setInterval(() => {
-    count += increment;
-    if (count >= target) {
-      count = target;
-      clearInterval(interval);
-    }
-    element.textContent = count;
-  }, 20);
-}
-
-function createCloud(card, left) {
-  const cloud = document.createElement("div");
-  cloud.className = "cloud";
-  cloud.style.width = 60 + Math.random()*40 + "px";
-  cloud.style.height = 30 + Math.random()*20 + "px";
-  cloud.style.top = Math.random() * 60 + "px";
-  cloud.style.left = left + "px";
-  cloud.style.animationDuration = 20 + Math.random()*10 + "s";
-  card.appendChild(cloud);
-}
-
-function createBuilding(card, left) {
-  const building = document.createElement("div");
-  building.className = "building";
-  const height = 60 + Math.random()*80;
-  building.style.height = height + "px";
-  building.style.left = left + "px";
-  
-  const lightsCount = Math.floor(Math.random() * 5);
-  for(let i=0;i<lightsCount;i++){
-    const light = document.createElement("div");
-    light.className = "building-light";
-    light.style.bottom = Math.random() * height + "px";
-    light.style.left = Math.random() * 30 + "px";
-    building.appendChild(light);
-  }
-  
-  card.appendChild(building);
-}
-
 function updateAQIVisual(aqi) {
-  const card = document.querySelector(".aqi-card");
-  
-  // Remove old elements
-  card.querySelectorAll(".sun, .cloud, .building").forEach(el => el.remove());
+  const card = document.querySelector(".aqi-card")
 
-  if(aqi <= 50) { // Good
-    card.style.background = "linear-gradient(to top, #a8e6cf, #dcedc1)";
-    const sun = document.createElement("div");
-    sun.className = "sun";
-    sun.style.position = "absolute";
-    sun.style.top = "20px";
-    sun.style.right = "20px";
-    sun.style.width = "50px";
-    sun.style.height = "50px";
-    card.appendChild(sun);
-  } else if(aqi <= 100) { // Moderate
-    card.style.background = "linear-gradient(to top, #fff3b0, #ffe066)";
-    for(let i=0; i<5; i++) createBuilding(card, 20 + i*60 + Math.random()*20);
-    for(let i=0; i<3; i++) createCloud(card, 20 + i*50 + Math.random()*20);
-  } else if(aqi <= 150) { // Unhealthy for Sensitive
-    card.style.background = "linear-gradient(to top, #fdd835, #f57c00)";
-    const sun = document.createElement("div");
-    sun.className = "sun";
-    sun.style.position = "absolute";
-    sun.style.top = "20px";
-    sun.style.right = "20px";
-    sun.style.width = "40px";
-    sun.style.height = "40px";
-    sun.style.background = "orange";
-    card.appendChild(sun);
-    for(let i=0;i<4;i++) createCloud(card, 20 + i*40 + Math.random()*20);
-  } else if(aqi <= 200) { // Unhealthy
-    card.style.background = "linear-gradient(to top, #f05454, #f08080)";
-    for(let i=0;i<5;i++) createCloud(card, 10 + i*35 + Math.random()*15);
-  } else { // Very Unhealthy
-    card.style.background = "linear-gradient(to top, #8B0000, #B22222)";
-    for(let i=0;i<6;i++) createCloud(card, 10 + i*30 + Math.random()*15);
+  // Remove old elements
+  card.querySelectorAll(".sun, .cloud, .building").forEach((el) => el.remove())
+
+  if (aqi <= 50) {
+    // Good
+    card.style.background = "linear-gradient(to top, #a8e6cf, #dcedc1)"
+    const sun = document.createElement("div")
+    sun.className = "sun"
+    sun.style.position = "absolute"
+    sun.style.top = "20px"
+    sun.style.right = "20px"
+    sun.style.width = "50px"
+    sun.style.height = "50px"
+    card.appendChild(sun)
+  } else if (aqi <= 100) {
+    // Moderate
+    card.style.background = "linear-gradient(to top, #fff3b0, #ffe066)"
+    for (let i = 0; i < 5; i++) createBuilding(card, 20 + i * 60 + Math.random() * 20)
+    for (let i = 0; i < 3; i++) createCloud(card, 20 + i * 50 + Math.random() * 20)
+  } else if (aqi <= 150) {
+    // Unhealthy for Sensitive
+    card.style.background = "linear-gradient(to top, #fdd835, #f57c00)"
+    const sun = document.createElement("div")
+    sun.className = "sun"
+    sun.style.position = "absolute"
+    sun.style.top = "20px"
+    sun.style.right = "20px"
+    sun.style.width = "40px"
+    sun.style.height = "40px"
+    sun.style.background = "orange"
+    card.appendChild(sun)
+    for (let i = 0; i < 4; i++) createCloud(card, 20 + i * 40 + Math.random() * 20)
+  } else if (aqi <= 200) {
+    // Unhealthy
+    card.style.background = "linear-gradient(to top, #f05454, #f08080)"
+    for (let i = 0; i < 5; i++) createCloud(card, 10 + i * 35 + Math.random() * 15)
+  } else {
+    // Very Unhealthy
+    card.style.background = "linear-gradient(to top, #8B0000, #B22222)"
+    for (let i = 0; i < 6; i++) createCloud(card, 10 + i * 30 + Math.random() * 15)
   }
 }
 
+// Fetch AQI Data
 async function fetchAQIData() {
   try {
-    const response = await fetch("https://api.waqi.info/feed/patna/?token=3a4de3c409e5e4a8dfebed640fbec023e748e572");
-    const data = await response.json();
+    const response = await fetch("https://api.waqi.info/feed/patna/?token=3a4de3c409e5e4a8dfebed640fbec023e748e572")
+    const data = await response.json()
 
     if (data.status === "ok" && data.data) {
-      const aqiValue = data.data.aqi;
+      const aqiValue = data.data.aqi
 
-      const aqiNumberElement = document.querySelector(".aqi-number");
-      const aqiStatusElement = document.querySelector(".aqi-status");
+      const aqiNumberElement = document.querySelector(".aqi-number")
+      const aqiStatusElement = document.querySelector(".aqi-status")
 
-      if (aqiNumberElement) animateCounter(aqiNumberElement, aqiValue);
+      if (aqiNumberElement) animateCounter(aqiNumberElement, aqiValue)
 
       if (aqiStatusElement) {
-        let status = "Good", statusClass = "good";
-        if (aqiValue > 200) { status = "Very Unhealthy"; statusClass = "unhealthy"; }
-        else if (aqiValue > 150) { status = "Unhealthy"; statusClass = "unhealthy"; }
-        else if (aqiValue > 100) { status = "Unhealthy for Sensitive"; statusClass = "sensitive"; }
-        else if (aqiValue > 50) { status = "Moderate"; statusClass = "moderate"; }
+        let status = "Good",
+          statusClass = "good"
+        if (aqiValue > 200) {
+          status = "Very Unhealthy"
+          statusClass = "unhealthy"
+        } else if (aqiValue > 150) {
+          status = "Unhealthy"
+          statusClass = "unhealthy"
+        } else if (aqiValue > 100) {
+          status = "Unhealthy for Sensitive"
+          statusClass = "sensitive"
+        } else if (aqiValue > 50) {
+          status = "Moderate"
+          statusClass = "moderate"
+        }
 
-        aqiStatusElement.textContent = status;
-        aqiStatusElement.className = `aqi-status ${statusClass}`;
+        aqiStatusElement.textContent = status
+        aqiStatusElement.className = `aqi-status ${statusClass}`
       }
 
-      updateAQIVisual(aqiValue);
+      updateAQIVisual(aqiValue)
     }
   } catch (error) {
-    console.error("Error fetching AQI data:", error);
+    console.error("Error fetching AQI data:", error)
   }
 }
 
 // Initial fetch
-fetchAQIData();
+fetchAQIData()
 
 // Refresh every 15 minutes
-setInterval(fetchAQIData, 900000);
+setInterval(fetchAQIData, 900000)
