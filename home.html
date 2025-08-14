@@ -18,10 +18,10 @@
         <span class="logo-subtitle">काठमाडौं स्वास्थ्य सेवा</span>
       </div>
       <ul class="nav-links">
-        <li><a href="#" class="active">Dashboard</a></li>
-        <li><a href="fitness-tracker.html">Fitness Tracker</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="myyy mood.html">सहायता</a></li>
+        <li><a href="#" class="active"><strong> Dashboard</strong></a></li>
+        <li><a href="fitness-tracker.html"><strong>Fitness Tracker</strong></a></li>
+        <li><a href="about.html"><strong>About</strong></a></li>
+        <li><a href="myyy mood.html"><strong>Mood & Mind</strong></a></li>
         <li><a href="#" onclick="logout()" class="logout-btn">Logout</a></li>
       </ul>
     </div>
@@ -75,150 +75,180 @@
             </div>
           </div>
         </div>
-        <div class="aqi-card animate-fade-in-up" style="animation-delay: 0.4s;">
-          <h3>🌫️ Air Quality Index</h3>
-          <div class="aqi-value">
-            <span class="aqi-number animate-counter" data-target="156">0</span>
-            <span class="aqi-status unhealthy">Unhealthy</span>
-          </div>
-          <p>
-            Air quality in Kathmandu is currently unhealthy. Wear N95 masks outdoors 
-            and consider staying indoors during peak traffic hours (7-9 AM, 5-7 PM).
-          </p>
-          <div class="aqi-tips">
-            <small>💡 Tip: Visit Shivapuri or Nagarjun for cleaner air</small>
-          </div>
-        </div>
+
+<div class="aqi-card animate-fade-in-up">
+  <h3>🌫️ Air Quality Index</h3>
+  <div class="aqi-number">0</div>
+  <div class="aqi-status good">Good</div>
+  <p class="aqi-description">Air quality is good.</p>
+  <div class="aqi-tips">
+    <small>💡 Tip: Visit Shivapuri or Nagarjun for cleaner air</small>
+  </div>
+</div>
+
+
       </section>
 
-      <!-- Enhanced Tabs -->
       <section class="tabs-container scroll-animate">
-        <div class="tabs">
-          <button class="tab active animate-slide-up" data-tab="health-centers" style="animation-delay: 0.1s;">
-            🏥 Health Centers
-          </button>
-          <button class="tab animate-slide-up" data-tab="wellness-spots" style="animation-delay: 0.2s;">
-            🧘‍♀️ Wellness & Ayurveda
-          </button>
-          <button class="tab animate-slide-up" data-tab="pharmacies" style="animation-delay: 0.3s;">
-            💊 Pharmacies
-          </button>
-        </div>
+  <div class="tabs">
+    <button class="tab active animate-slide-up" data-tab="health-centers" style="animation-delay: 0.1s;">🏥 Health Centers</button>
+    <button class="tab animate-slide-up" data-tab="wellness-spots" style="animation-delay: 0.2s;">🧘‍♀️ Wellness & Ayurveda</button>
+    <button class="tab animate-slide-up" data-tab="specialized-doctors" style="animation-delay: 0.3s;">🩺 Specialized Doctors</button>
+  </div>
 
-        <div class="tabpanel active" id="health-centers">
-          <h3>Major Hospitals & Clinics in Kathmandu</h3>
-          <div class="grid">
-            <div class="card featured scroll-animate-card" style="animation-delay: 0.1s;">
-              <h4>🏥 TU Teaching Hospital</h4>
-              <p>📍 Maharajgunj, Kathmandu</p>
-              <p>🚨 24/7 Emergency & Trauma Center</p>
-              <p>📞 +977-1-4412303</p>
-              <div class="card-badge">Government</div>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.2s;">
-              <h4>🏥 Bir Hospital</h4>
-              <p>📍 Mahaboudha, Kathmandu</p>
-              <p>🩺 General Medicine & Surgery</p>
-              <p>📞 +977-1-4221119</p>
-              <div class="card-badge">Government</div>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.3s;">
-              <h4>🏥 Patan Hospital</h4>
-              <p>📍 Lagankhel, Lalitpur</p>
-              <p>👶 Pediatrics & Maternity</p>
-              <p>📞 +977-1-5522266</p>
-              <div class="card-badge">NGO</div>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.4s;">
-              <h4>🏥 Grande International Hospital</h4>
-              <p>📍 Dhapasi, Kathmandu</p>
-              <p>💎 Premium Healthcare Services</p>
-              <p>📞 +977-1-5159266</p>
-              <div class="card-badge private">Private</div>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.5s;">
-              <h4>🏥 Nepal Medical College</h4>
-              <p>📍 Jorpati, Kathmandu</p>
-              <p>🎓 Teaching Hospital</p>
-              <p>📞 +977-1-4911008</p>
-              <div class="card-badge">Private</div>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.6s;">
-              <h4>🏥 Dhulikhel Hospital</h4>
-              <p>📍 Dhulikhel, Kavre</p>
-              <p>🌄 Community Healthcare</p>
-              <p>📞 +977-11-490497</p>
-              <div class="card-badge">NGO</div>
-            </div>
-          </div>
+  <!-- Health Centers -->
+  <div class="tabpanel active" id="health-centers">
+    <h3>Major Hospitals & Clinics in Kathmandu</h3>
+    <div class="grid">
+      <a href="https://www.iom.edu.np" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card featured scroll-animate-card" style="animation-delay: 0.1s;">
+          <h4>🏥 TU Teaching Hospital</h4>
+          <p>📍 Maharajgunj, Kathmandu</p>
+          <p>🚨 24/7 Emergency & Trauma Center</p>
+          <p>📞 +977-1-4412303</p>
+          <div class="card-badge">Government</div>
         </div>
+      </a>
+      <a href="https://nams.org.np" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.2s;">
+          <h4>🏥 Bir Hospital</h4>
+          <p>📍 Mahaboudha, Kathmandu</p>
+          <p>🩺 General Medicine & Surgery</p>
+          <p>📞 +977-1-4221119</p>
+          <div class="card-badge">Government</div>
+        </div>
+      </a>
+      <a href="https://www.pahs.edu.np" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.3s;">
+          <h4>🏥 Patan Hospital</h4>
+          <p>📍 Lagankhel, Lalitpur</p>
+          <p>👶 Pediatrics & Maternity</p>
+          <p>📞 +977-1-5522266</p>
+          <div class="card-badge">NGO</div>
+        </div>
+      </a>
+      <a href="https://www.grandehospital.com" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.4s;">
+          <h4>🏥 Grande International Hospital</h4>
+          <p>📍 Dhapasi, Kathmandu</p>
+          <p>💎 Premium Healthcare Services</p>
+          <p>📞 +977-1-5159266</p>
+          <div class="card-badge private">Private</div>
+        </div>
+      </a>
+      <a href="https://nmcth.edu" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.5s;">
+          <h4>🏥 Nepal Medical College</h4>
+          <p>📍 Jorpati, Kathmandu</p>
+          <p>🎓 Teaching Hospital</p>
+          <p>📞 +977-1-4911008</p>
+          <div class="card-badge">Private</div>
+        </div>
+      </a>
+      <a href="https://www.dhulikhelhospital.org" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.6s;">
+          <h4>🏥 Dhulikhel Hospital</h4>
+          <p>📍 Dhulikhel, Kavre</p>
+          <p>🌄 Community Healthcare</p>
+          <p>📞 +977-11-490497</p>
+          <div class="card-badge">NGO</div>
+        </div>
+      </a>
+    </div>
+  </div>
 
-        <div class="tabpanel" id="wellness-spots">
-          <h3>Wellness Centers & Traditional Medicine</h3>
-          <div class="grid">
-            <div class="card scroll-animate-card" style="animation-delay: 0.1s;">
-              <h4>🧘‍♀️ Nepal Yoga Home</h4>
-              <p>📍 Thamel, Kathmandu</p>
-              <p>🕉️ Traditional Yoga & Meditation</p>
-              <p>📞 +977-1-4700632</p>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.2s;">
-              <h4>🌿 Ayurveda Health Home</h4>
-              <p>📍 New Baneshwor, Kathmandu</p>
-              <p>🌱 Panchakarma & Herbal Treatment</p>
-              <p>📞 +977-1-4782333</p>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.3s;">
-              <h4>💆‍♀️ Seeing Hands Clinic</h4>
-              <p>📍 Lazimpat, Kathmandu</p>
-              <p>👐 Therapeutic Massage by Visually Impaired</p>
-              <p>📞 +977-1-4429178</p>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.4s;">
-              <h4>🧘‍♂️ Himalayan Yoga Academy</h4>
-              <p>📍 Bouddha, Kathmandu</p>
-              <p>🏔️ Mountain Meditation Retreats</p>
-              <p>📞 +977-1-4480430</p>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.5s;">
-              <h4>🌸 Spa Therapy Center</h4>
-              <p>📍 Durbar Marg, Kathmandu</p>
-              <p>💅 Wellness & Beauty Treatments</p>
-              <p>📞 +977-1-4220909</p>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.6s;">
-              <h4>🏃‍♂️ Fitness First Nepal</h4>
-              <p>📍 Anamnagar, Kathmandu</p>
-              <p>💪 Modern Gym & Fitness Classes</p>
-              <p>📞 +977-1-4221155</p>
-            </div>
-          </div>
+  <!-- Wellness Centers -->
+  <div class="tabpanel" id="wellness-spots">
+    <h3>Wellness Centers & Traditional Medicine</h3>
+    <div class="grid">
+      <a href="https://www.nepalyogahome.com" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.1s;">
+          <h4>🧘‍♀️ Nepal Yoga Home</h4>
+          <p>📍 Thamel, Kathmandu</p>
+          <p>🕉️ Traditional Yoga & Meditation</p>
+          <p>📞 +977-1-4700632</p>
         </div>
+      </a>
+      <a href="https://ayurveda.com.np" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.2s;">
+          <h4>🌿 Ayurveda Health Home</h4>
+          <p>📍 New Baneshwor, Kathmandu</p>
+          <p>🌱 Panchakarma & Herbal Treatment</p>
+          <p>📞 +977-1-4782333</p>
+        </div>
+      </a>
+      <a href="https://seeinghandsnepal.org" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.3s;">
+          <h4>💆‍♀️ Seeing Hands Clinic</h4>
+          <p>📍 Lazimpat, Kathmandu</p>
+          <p>👐 Therapeutic Massage by Visually Impaired</p>
+          <p>📞 +977-1-4429178</p>
+        </div>
+      </a>
+      <a href="https://himalayanyogaacademy.com" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.4s;">
+          <h4>🧘‍♂️ Himalayan Yoga Academy</h4>
+          <p>📍 Bouddha, Kathmandu</p>
+          <p>🏔️ Mountain Meditation Retreats</p>
+          <p>📞 +977-1-4480430</p>
+        </div>
+      </a>
+      <a href="https://nepalmassage.com/" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.5s;">
+          <h4>🌸 Spa Therapy Center</h4>
+          <p>📍 Durbar Marg, Kathmandu</p>
+          <p>💅 Wellness & Beauty Treatments</p>
+          <p>📞 +977-1-4220909</p>
+        </div>
+      </a>
+      <a href="https://share.google/fOaWCGIQYgAfjF8vI" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="card scroll-animate-card" style="animation-delay: 0.6s;">
+          <h4>🏃‍♂️ Fitness First Nepal</h4>
+          <p>📍 Anamnagar, Kathmandu</p>
+          <p>💪 Modern Gym & Fitness Classes</p>
+          <p>📞 +977-1-4221155</p>
+        </div>
+      </a>
+    </div>
+  </div>
 
-        <div class="tabpanel" id="pharmacies">
-          <h3>24/7 Pharmacies & Medical Stores</h3>
-          <div class="grid">
-            <div class="card scroll-animate-card" style="animation-delay: 0.1s;">
-              <h4>💊 Bhat Bhateni Pharmacy</h4>
-              <p>📍 Multiple Locations</p>
-              <p>🕐 24/7 Service Available</p>
-              <p>📞 +977-1-4221457</p>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.2s;">
-              <h4>💊 Omni Pharmacy</h4>
-              <p>📍 New Road, Kathmandu</p>
-              <p>🩹 Medical Equipment & Supplies</p>
-              <p>📞 +977-1-4220055</p>
-            </div>
-            <div class="card scroll-animate-card" style="animation-delay: 0.3s;">
-              <h4>💊 Medicare Pharmacy</h4>
-              <p>📍 Maharajgunj, Kathmandu</p>
-              <p>💉 Prescription & OTC Medicines</p>
-              <p>📞 +977-1-4412789</p>
-            </div>
-          </div>
+  <!-- Specialized Doctors -->
+<div class="tabpanel" id="specialized-doctors">
+  <h3>Specialized Doctors</h3>
+  <div class="grid">
+    <a href="#" target="_blank" style="text-decoration:none; color:inherit;">
+      <div class="card scroll-animate-card" style="animation-delay: 0.1s; display:flex; align-items:center; gap:15px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Male Doctor" style="width:50px; height:50px; border-radius:50%;">
+        <div>
+          <h4>🩺 Dr. Kamal Lamsal</h4>
+          <p>Specialty: [Add Specialty Here]</p>
+          <p>📞 [Add Contact]</p>
         </div>
-      </section>
+      </div>
+    </a>
+    <a href="#" target="_blank" style="text-decoration:none; color:inherit;">
+      <div class="card scroll-animate-card" style="animation-delay: 0.2s; display:flex; align-items:center; gap:15px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Male Doctor" style="width:50px; height:50px; border-radius:50%;">
+        <div>
+          <h4>🩺 Dr. Anil Kumar Bhatta, PhD</h4>
+          <p>Specialty: [Add Specialty Here]</p>
+          <p>📞 [Add Contact]</p>
+        </div>
+      </div>
+    </a>
+    <a href="#" target="_blank" style="text-decoration:none; color:inherit;">
+      <div class="card scroll-animate-card" style="animation-delay: 0.3s; display:flex; align-items:center; gap:15px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Male Doctor" style="width:50px; height:50px; border-radius:50%;">
+        <div>
+          <h4>🩺 Dr. Arun Sayami</h4>
+          <p>Specialty: [Add Specialty Here]</p>
+          <p>📞 [Add Contact]</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+</section>
 
       <!-- Enhanced Events with Nepali context -->
       <section class="events-section scroll-animate">
